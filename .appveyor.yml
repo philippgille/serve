@@ -1,0 +1,16 @@
+version: "{build}"
+
+# GitHub specific alternative to `clone_depth: <number>`
+shallow_clone: true
+
+clone_folder: c:\gopath\src\github.com\philippgille\serve
+
+environment:
+  GOPATH: c:\gopath
+
+install:
+  - go version
+  - go env
+
+build_script:
+  - go build
