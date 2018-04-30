@@ -1,7 +1,11 @@
 serve
 =====
 
-`serve` starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues
+[![Build Status](https://travis-ci.org/philippgille/serve.svg?branch=master)](https://travis-ci.org/philippgille/serve) [![Build status](https://ci.appveyor.com/api/projects/status/nt16vsv7j1yk9yo2?svg=true)](https://ci.appveyor.com/project/philippgille/serve) [![Go Report Card](https://goreportcard.com/badge/github.com/philippgille/serve)](https://goreportcard.com/report/github.com/philippgille/serve)
+
+`serve` starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues.
+
+It's based on [this Gist](https://gist.github.com/paulmach/7271283/2a1116ca15e34ee23ac5a3a87e2a626451424993) by [Paul Mach](https://github.com/paulmach).
 
 Install
 -------
