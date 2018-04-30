@@ -14,6 +14,19 @@ With Go installed:
 
 `go get github.com/philippgille/serve`
 
+Without Go installed:
+
+1. Download the correct binary for your OS from [GitHub Releases](https://github.com/philippgille/serve/releases)
+2. Rename the file to "serve" (on Linux/macOS) or "serve.exe" (on Windows)
+2. Make it available as shell command with one of the following options:
+    - Put the binary into a directory that's on your `PATH`
+        - For example `$HOME/bin` or `/usr/local/bin` on Linux
+    - Add the directory where you put the binary to the `PATH`
+    - Create an alias for the binary in your shell's profile (no need to rename the binary in this case)
+        > Note: Most Windows folks don't know this, but PowerShell has a profile, too:  
+        > Just examine the environment variable `$profile` to see the file's path.  
+        > Example: `C:\Users\John\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
+
 Use
 ---
 
@@ -61,7 +74,14 @@ To build `serve` by yourself:
 2. `cd` into the root directory of this repository
 3. Execute: `go build`
 
+> Note: The binaries in GitHub Releases are shrinked with additional Go linker flags
+
 To also make `serve` available as command in other directories:
 
 1. Add `$GOPATH/bin` to your `PATH` if you haven't done that already when installing Go
 2. Execute: `go install`
+
+There are also build scripts for Windows and Linux for creating release artifacts (shrinked binaries for Windows, macOS and Linux):
+
+- Windows: `.\build.ps1`
+- Linux: `./build.sh`

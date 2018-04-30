@@ -14,3 +14,4 @@ install:
 
 build_script:
   - go build
+  - .\build.ps1
