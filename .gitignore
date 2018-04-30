@@ -12,3 +12,12 @@
 
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
+
+### Custom additions ###
+
+# GitEye
+/.project
+
+# Build artifacts
+serve
+/artifacts
