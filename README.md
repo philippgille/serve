@@ -89,7 +89,7 @@ To build `serve` by yourself:
 2. `cd` into the root directory of this repository
 3. Execute: `go build`
 
-> Note: The binaries in GitHub Releases are shrinked with additional Go linker flags
+> Note: The binaries in GitHub Releases are shrinked with additional Go linker flags and UPX
 
 To also make `serve` available as command in other directories:
 

@@ -11,6 +11,8 @@ environment:
 install:
   - go version
   - go env
+  # Install tools
+  - choco install upx
 
 build_script:
   - go build
