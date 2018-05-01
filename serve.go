@@ -4,8 +4,11 @@ Based on the Gist https://gist.github.com/paulmach/7271283/2a1116ca15e34ee23ac5a
 by Paul Mach (https://github.com/paulmach)
 
 Usage:
-	-p="8100": port to serve on
-	-d=".":    the directory of static files to host
+  -d string
+        The directory of static file to host (default ".")
+  -p string
+        Port to serve on (default "8100")
+  -v    Print the version
 
 Navigating to http://localhost:8100 will display the index.html
 or directory listing file.
@@ -18,13 +21,26 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"os"
 	"strings"
 )
 
+// Increment and remove "+" in release commits.
+// Add "+" after release commits.
+const version = "v0.1.0+"
+
 func main() {
-	port := flag.String("p", "8100", "port to serve on")
-	directory := flag.String("d", ".", "the directory of static file to host")
+	// Flags
+	port := flag.String("p", "8100", "Port to serve on")
+	directory := flag.String("d", ".", "The directory of static file to host")
+	printVersion := flag.Bool("v", false, "Print the version")
 	flag.Parse()
+
+	// If the "v" flag was used, only print the version and exit
+	if *printVersion {
+		fmt.Printf("serve version: %v\n", version)
+		os.Exit(0)
+	}
 
 	http.Handle("/", http.FileServer(http.Dir(*directory)))
 
@@ -38,7 +54,7 @@ func main() {
 
 // printAddrs prints the local network interfaces and their IP addresses
 func printAddrs(port string) {
-	fmt.Println("\nLocal network interfaces and their IP address so you can pass one to your colleagues:\n")
+	fmt.Println("\nLocal network interfaces and their IP addresses so you can pass one to your colleagues:\n")
 	ifaces, err := net.Interfaces()
 	if err != nil {
 		log.Fatal(err)

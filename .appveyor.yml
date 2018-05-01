@@ -15,3 +15,6 @@ install:
 build_script:
   - go build
   - .\build.ps1
+
+test_script:
+  - .\serve.exe -v

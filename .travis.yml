@@ -9,3 +9,5 @@ go:
 script:
   - go build
   - ./build.sh
+  # test
+  - ./serve -v

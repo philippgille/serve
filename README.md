@@ -47,9 +47,10 @@ Use
 $ serve -h
 Usage of serve:
   -d string
-    	the directory of static file to host (default ".")
+        The directory of static file to host (default ".")
   -p string
-    	port to serve on (default "8100")
+        Port to serve on (default "8100")
+  -v    Print the version
 ```
 
 Hit `^C` to cancel.

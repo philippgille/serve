@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+- Added: Version flag to print the version of the CLI
+
 v0.1.0 (2018-05-01)
 -------------------
 
