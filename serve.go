@@ -79,7 +79,7 @@ func printAddrs(port string) {
 	fmt.Println("----------------|-----------------|----------------")
 	fav := ""
 	for _, iface := range ifaces {
-		fmt.Printf("%-15v |", iface.Name)
+		fmt.Printf("%-15v |", cutString(iface.Name, 15))
 		addrs, err := iface.Addrs()
 		if err != nil {
 			log.Fatal(err)
@@ -118,4 +118,12 @@ func overwriteIfEmpty(s *string, overwrite string) {
 	if *s == "" {
 		*s = overwrite
 	}
+}
+
+// cutString cuts strings that exceed the maxLen to (maxLen-2) and adds ".."
+func cutString(s string, maxLen int) string {
+	if len(s) > maxLen {
+		return s[:maxLen-2] + ".."
+	}
+	return s
 }

@@ -21,3 +21,6 @@
 # Build artifacts
 serve
 /artifacts
+
+# Visual Studio Code debug files
+debug
