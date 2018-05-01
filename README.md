@@ -1,11 +1,19 @@
 serve
 =====
 
-[![Build Status](https://travis-ci.org/philippgille/serve.svg?branch=master)](https://travis-ci.org/philippgille/serve) [![Build status](https://ci.appveyor.com/api/projects/status/nt16vsv7j1yk9yo2?svg=true)](https://ci.appveyor.com/project/philippgille/serve) [![Go Report Card](https://goreportcard.com/badge/github.com/philippgille/serve)](https://goreportcard.com/report/github.com/philippgille/serve)
+[![Build Status](https://travis-ci.org/philippgille/serve.svg?branch=master)](https://travis-ci.org/philippgille/serve) [![Build status](https://ci.appveyor.com/api/projects/status/nt16vsv7j1yk9yo2?svg=true)](https://ci.appveyor.com/project/philippgille/serve) [![Go Report Card](https://goreportcard.com/badge/github.com/philippgille/serve)](https://goreportcard.com/report/github.com/philippgille/serve) [![GitHub Releases](https://img.shields.io/github/release/philippgille/serve.svg)](https://github.com/philippgille/serve/releases)
 
 `serve` starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues.
 
 It's based on [this Gist](https://gist.github.com/paulmach/7271283/2a1116ca15e34ee23ac5a3a87e2a626451424993) by [Paul Mach](https://github.com/paulmach).
+
+Contents
+--------
+
+- [Install](#install)
+- [Use](#use)
+    - [Example](#example)
+- [Build](#build)
 
 Install
 -------
@@ -22,10 +30,15 @@ Without Go installed:
     - Put the binary into a directory that's on your `PATH`
         - For example `$HOME/bin` or `/usr/local/bin` on Linux
     - Add the directory where you put the binary to the `PATH`
-    - Create an alias for the binary in your shell's profile (no need to rename the binary in this case)
-        > Note: Most Windows folks don't know this, but PowerShell has a profile, too:  
-        > Just examine the environment variable `$profile` to see the file's path.  
-        > Example: `C:\Users\John\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
+    - Create an alias for the binary in your shell's profile
+        - (No need to rename the binary in this case)
+    - Create a function that calls the binary in your shell's profile
+        - (No need to rename the binary in this case)
+        - Has the advantage (over aliases) that it can be used in scripts
+
+> Note: Most Windows folks don't know this, but PowerShell has a profile, too:  
+> Just examine the environment variable `$profile` to see the file's path.  
+> Example: `C:\Users\John\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
 
 Use
 ---
