@@ -27,7 +27,7 @@ import (
 
 // Increment and remove "+" in release commits.
 // Add "+" after release commits.
-const version = "v0.1.0+"
+const version = "v0.2.0"
 
 func main() {
 	// Flags in alphabetical order, just like "-h" prints them
