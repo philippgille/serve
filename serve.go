@@ -86,10 +86,11 @@ func printAddrs(port string) {
 		}
 		// The interesting interfaces like eth0 and wlan0 typically have 2 addresses: one IPv4 and one IPv6 address.
 		// But some interfaces just have one of them, or if an interface is deactivated it doesn't have any.
-		// We take care of these mentioned possibilities. We ignore the third and more addresses.
+		// On Windows the main network interface like "Ethernet 3" can have many addresses and the main IPv4 address doesn't have to be one of the first 2.
+		// We must take care of all these combinations.
 		ipv4 := ""
 		ipv6 := ""
-		for i := 0; i < 2 && i < len(addrs); i++ {
+		for i := 0; i < len(addrs) && (ipv4 == "" || ipv6 == ""); i++ {
 			// In the case of two addresses they could potentially be of the same type.
 			// We want to show the first address. overwriteIfEmpty() doesn't overwrite existing values.
 			addrWithoutMask := strings.Split(addrs[i].String(), "/")[0]
@@ -99,7 +100,7 @@ func printAddrs(port string) {
 			} else {
 				overwriteIfEmpty(&ipv4, addrWithoutMask)
 				overwriteIfEmpty(&ipv6, "")
-				if (iface.Name == "eth0" || iface.Name == "wlan0") && fav == "" {
+				if (iface.Name == "eth0" || iface.Name == "wlan0" || iface.Name[:8] == "Ethernet") && fav == "" {
 					fav = addrWithoutMask
 				}
 			}

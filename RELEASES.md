@@ -11,6 +11,7 @@ vNext
 - Added: Version flag to print the version of the CLI
 - Added: Test flag for a dry run which only prints the network interface table
 - Fixed: Network interface table looks bad on Windows ([issue #2](https://github.com/philippgille/serve/issues/2))
+- Fixed: IPv4 address doesn't get printed for the main network interface on Windows ([issue #3](https://github.com/philippgille/serve/issues/3))
 
 v0.1.0 (2018-05-01)
 -------------------
