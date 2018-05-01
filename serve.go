@@ -100,7 +100,10 @@ func printAddrs(port string) {
 			} else {
 				overwriteIfEmpty(&ipv4, addrWithoutMask)
 				overwriteIfEmpty(&ipv6, "")
-				if (iface.Name == "eth0" || iface.Name == "wlan0" || iface.Name[:8] == "Ethernet") && fav == "" {
+				if (iface.Name == "eth0" ||
+					iface.Name == "wlan0" ||
+					(len(iface.Name) >= 8 && iface.Name[:8] == "Ethernet")) &&
+					fav == "" {
 					fav = addrWithoutMask
 				}
 			}
