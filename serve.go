@@ -8,10 +8,10 @@ Usage:
         The directory of static file to host (default ".")
   -p string
         Port to serve on (default "8100")
+  -t    Test / dry run (just prints the interface table)
   -v    Print the version
 
-Navigating to http://localhost:8100 will display the index.html
-or directory listing file.
+Navigating to http://localhost:8100 will display the index.html or directory listing file.
 */
 package main
 
@@ -30,9 +30,10 @@ import (
 const version = "v0.1.0+"
 
 func main() {
-	// Flags
-	port := flag.String("p", "8100", "Port to serve on")
+	// Flags in alphabetical order, just like "-h" prints them
 	directory := flag.String("d", ".", "The directory of static file to host")
+	port := flag.String("p", "8100", "Port to serve on")
+	test := flag.Bool("t", false, "Test / dry run (just prints the interface table)")
 	printVersion := flag.Bool("v", false, "Print the version")
 	flag.Parse()
 
@@ -42,11 +43,18 @@ func main() {
 		os.Exit(0)
 	}
 
+	// If the "t" flag was used, only print the network interface table and exit
+	if *test {
+		printAddrs(*port)
+		os.Exit(0)
+	}
+
+	// Register handler for "/" in Go's DefaultServeMux
 	http.Handle("/", http.FileServer(http.Dir(*directory)))
 
 	fmt.Printf("\nServing \"%s\" on all network interfaces (0.0.0.0) on HTTP port: %s\n", *directory, *port)
 
-	// Print local IP addresses
+	// Print local network interfaces and their IP addresses
 	printAddrs(*port)
 
 	log.Fatal(http.ListenAndServe(":"+*port, nil))

@@ -50,6 +50,7 @@ Usage of serve:
         The directory of static file to host (default ".")
   -p string
         Port to serve on (default "8100")
+  -t    Test / dry run (just prints the interface table)
   -v    Print the version
 ```
 

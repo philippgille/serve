@@ -9,6 +9,7 @@ vNext
 -----
 
 - Added: Version flag to print the version of the CLI
+- Added: Test flag for a dry run which only prints the network interface table
 
 v0.1.0 (2018-05-01)
 -------------------

@@ -11,3 +11,4 @@ script:
   - ./build.sh
   # test
   - ./serve -v
+  - ./serve -t

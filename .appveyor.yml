@@ -18,3 +18,4 @@ build_script:
 
 test_script:
   - .\serve.exe -v
+  - .\serve.exe -t
