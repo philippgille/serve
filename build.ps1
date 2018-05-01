@@ -1,3 +1,7 @@
+param (
+    [switch] $isAppVeyor
+)
+
 $ErrorActionPreference = "Stop"
 
 # Clean up the previous build
@@ -12,15 +16,29 @@ $version = Get-Content ${PSScriptRoot}\VERSION
 $go_arch_backup = go env GOARCH
 $env:GOARCH = "amd64"
 # Write-Output because PowerShell doesn't have an equivalent to "set -x" to print the executed commands like Bash
-Write-Output "Building Binary for Windows"
+Write-Output "Building binary for Windows"
 $env:GOOS = "windows"
 go build -v -o "${PSScriptRoot}\artifacts\serve_v${version}_Windows_x64.exe" -ldflags="-s -w" "github.com/philippgille/serve"
-Write-Output "Building Binary for macOS"
+Write-Output "Building binary for macOS"
 $env:GOOS = "darwin"
+# Sleep and "go build" to prevent "internal/race" and other errors on AppVeyor
+if ($isAppVeyor)
+{
+    Start-Sleep -s 5
+    go build
+    Start-Sleep -s 5
+}
 go build -v -o "${PSScriptRoot}\artifacts\serve_v${version}_macOS_x64" -ldflags="-s -w" "github.com/philippgille/serve"
-Write-Output "Building Binary for Linux"
+Write-Output "Building binary for Linux"
 $env:GOOS = "linux"
+if ($isAppVeyor)
+{
+    Start-Sleep -s 5
+    go build
+    Start-Sleep -s 5
+}
 go build -v -o "${PSScriptRoot}\artifacts\serve_v${version}_Linux_x64" -ldflags="-s -w" "github.com/philippgille/serve"
+Write-Output "Finished building binaries"
 # Reset
 $env:GOOS = "windows"
 $env:GOARCH = $go_arch_backup

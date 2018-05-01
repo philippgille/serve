@@ -16,8 +16,13 @@ install:
 
 build_script:
   - go build
-  - .\build.ps1
+  - ps: .\build.ps1 -isAppVeyor
 
 test_script:
   - .\serve.exe -v
   - .\serve.exe -t
+  # Use PowerShell for glob. ".\" is necessary in this case.
+  - ps: .\artifacts\serve_v*_Windows_x64.exe -v
+
+artifacts:
+- path: artifacts\*
