@@ -24,21 +24,21 @@ With Go installed:
 
 Without Go installed:
 
-1. Download the correct binary for your OS from [GitHub Releases](https://github.com/philippgille/serve/releases)
-2. Rename the file to "serve" (on Linux/macOS) or "serve.exe" (on Windows)
-2. Make it available as shell command with one of the following options:
+1. Download the correct archive for your OS from [GitHub Releases](https://github.com/philippgille/serve/releases)
+2. Extract the archive and make `serve` available as shell command in one of the following ways:
     - Put the binary into a directory that's on your `PATH`
-        - For example `$HOME/bin` or `/usr/local/bin` on Linux
+        - For example on Linux in `$HOME/bin` (for your current user) or `/usr/local/bin` (for all users)
     - Add the directory where you put the binary to the `PATH`
-    - Create an alias for the binary in your shell's profile
-        - (No need to rename the binary in this case)
     - Create a function that calls the binary in your shell's profile
-        - (No need to rename the binary in this case)
-        - Has the advantage (over aliases) that it can be used in scripts
-
-> Note: Most Windows folks don't know this, but PowerShell has a profile, too:  
-> Just examine the environment variable `$profile` to see the file's path.  
-> Example: `C:\Users\John\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
+        - Windows:
+            - The PowerShell profile is located at `$profile`
+                - Example: `C:\Users\John\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
+            - Example function: `function serve { $env:USERPROFILE\Downloads\serve_v0.2.0_Windows_x64\serve.exe $args }`
+            - Don't forget to load your profile afterwards with `. $profile`
+        - Linux:
+            - You should use a profile that's loaded for login shells as well as interactive non-login shells. When using Bash, `~.bashrc` is typically loaded by `~.profile` or `~.bash_profile`, so `~.bashrc` is a good place.
+            - Example function: `function serve() { $HOME/Downloads/serve_v0.2.0_Linux_x64/serve $@; }`
+            - Don't forget to load your profile afterwards with `source ~/.bashrc`
 
 Use
 ---
