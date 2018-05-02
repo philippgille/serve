@@ -11,6 +11,9 @@ Contents
 --------
 
 - [Install](#install)
+    - [Windows](#windows)
+    - [macOS](#macos)
+    - [Linux](#linux)
 - [Use](#use)
     - [Example](#example)
 - [Build](#build)
@@ -22,23 +25,31 @@ With Go installed:
 
 `go get github.com/philippgille/serve`
 
+> Note: Requires your `$GOPATH/bin` directory to be in your `PATH`, which is usually the case.
+
 Without Go installed:
 
-1. Download the correct archive for your OS from [GitHub Releases](https://github.com/philippgille/serve/releases)
-2. Extract the archive and make `serve` available as shell command in one of the following ways:
-    - Put the binary into a directory that's on your `PATH`
-        - For example on Linux in `$HOME/bin` (for your current user) or `/usr/local/bin` (for all users)
-    - Add the directory where you put the binary to the `PATH`
-    - Create a function that calls the binary in your shell's profile
-        - Windows:
-            - The PowerShell profile is located at `$profile`
-                - Example: `C:\Users\John\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
-            - Example function: `function serve { $env:USERPROFILE\Downloads\serve_v0.2.0_Windows_x64\serve.exe $args }`
-            - Don't forget to load your profile afterwards with `. $profile`
-        - Linux:
-            - You should use a profile that's loaded for login shells as well as interactive non-login shells. When using Bash, `~.bashrc` is typically loaded by `~.profile` or `~.bash_profile`, so `~.bashrc` is a good place.
-            - Example function: `function serve() { $HOME/Downloads/serve_v0.2.0_Linux_x64/serve $@; }`
-            - Don't forget to load your profile afterwards with `source ~/.bashrc`
+### Windows
+
+The easiest way is to use the package manager [Scoop](http://scoop.sh/).
+
+I can highly recommend it. If you haven't installed it yet, you can do so with:
+
+`iex (new-object net.webclient).downloadstring('https://get.scoop.sh')`
+
+Then, to install `serve`, just run:
+
+`scoop install serve`
+
+If you don't want to use Scoop, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/docs#manual-installation) for details.
+
+### macOS
+
+There's no [Homebrew](https://brew.sh/) "formulae" yet, but you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/docs#manual-installation) for details.
+
+### Linux
+
+There will be a [Snap](https://snapcraft.io/) package soon™. Until then you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/docs#manual-installation) for details.
 
 Use
 ---
@@ -54,7 +65,7 @@ Usage of serve:
   -v    Print the version
 ```
 
-Hit `^C` to cancel.
+Hit `Ctrl+C` in the terminal to stop the server.
 
 ### Example
 
@@ -79,6 +90,10 @@ veth0d522f4     |                 | fe80::307a:7fcf:fe3d:cba4
 You probably want to share:
 http://192.168.178.123:8100
 ```
+
+When opening the URL `http://192.168.178.123:8100` in a browser you see the directory you're serving. For example:
+
+![screenshot](screenshot.png)
 
 Build
 -----
