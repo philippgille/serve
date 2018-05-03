@@ -41,15 +41,15 @@ Then, to install `serve`, just run:
 
 `scoop install serve`
 
-If you don't want to use Scoop, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/docs#manual-installation) for details.
+If you don't want to use Scoop, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
 
 ### macOS
 
-There's no [Homebrew](https://brew.sh/) "formulae" yet, but you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/docs#manual-installation) for details.
+There's no [Homebrew](https://brew.sh/) "formulae" yet, but you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
 
 ### Linux
 
-There will be a [Snap](https://snapcraft.io/) package soon™. Until then you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/docs#manual-installation) for details.
+There will be a [Snap](https://snapcraft.io/) package soon™. Until then you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
 
 Use
 ---
