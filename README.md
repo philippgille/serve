@@ -104,7 +104,7 @@ http://192.168.178.123:8100
 
 When opening the URL `http://192.168.178.123:8100` in a browser you see the directory you're serving. For example:
 
-![screenshot](screenshot.png)
+![screenshot](assets/screenshot.png)
 
 Build
 -----
