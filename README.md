@@ -45,7 +45,18 @@ If you don't want to use Scoop, you can download the binary from the [releases](
 
 ### macOS
 
-There's no [Homebrew](https://brew.sh/) "formulae" yet, but you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
+The easiest way is to use the package manager [Homebrew](https://brew.sh/).
+
+It's the most popular package manager on macOS. If you haven't installed it yet, you can do so with:
+
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+
+Then, to install `serve`, just run:
+
+`brew tap philippgille/tap`  
+`brew install serve`
+
+If you don't want to use Homebrew, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
 
 ### Linux
 
