@@ -60,7 +60,19 @@ If you don't want to use Homebrew, you can download the binary from the [release
 
 ### Linux
 
-There will be a [Snap](https://snapcraft.io/) package soon™. Until then you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
+The easiest way is to use the package manager [Snap](https://snapcraft.io/).
+
+It's already installed on Ubuntu 16.04 and later. On Ubuntu 14.04 you can install it with:
+
+`sudo apt install snapd`
+
+For other Linux distributions check [Install snapd](https://docs.snapcraft.io/core/install).
+
+Then, to install `serve`, just run:
+
+`sudo snap install serve`
+
+If you don't want to use Snap, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
 
 Use
 ---
@@ -104,7 +116,7 @@ http://192.168.178.123:8100
 
 When opening the URL `http://192.168.178.123:8100` in a browser you see the directory you're serving. For example:
 
-![screenshot](assets/screenshot.png)
+![screenshot](assets/example-2-browser.png)
 
 Build
 -----
@@ -126,3 +138,20 @@ There are also build scripts for Windows and Linux for creating release artifact
 
 - Windows: `.\build.ps1`
 - Linux: `./build.sh`
+
+### Packages
+
+For Scoop and Homebrew no packages need to be built. They use "manifests"/"formulae" and the binaries from GitHub Releases.
+
+For Snap a Git hook is set up in the Snapcraft dashboard to automatically build a new Snap on every commit, but the package can also be built manually with:
+
+`snapcraft`
+
+Or when Snapcraft isn't installed, but Docker is:
+
+`docker run --rm -v ${pwd}:/build/serve -w /build/serve snapcraft/xenial-amd64 snapcraft`
+
+To release the snap into the public Snap channels:
+
+`snapcraft login`
+`snapcraft push serve_0.2.0_amd64.snap --release`
