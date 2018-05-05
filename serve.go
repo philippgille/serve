@@ -23,6 +23,7 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"runtime"
 	"strings"
 )
 
@@ -139,12 +140,24 @@ func overwriteIfEmpty(s *string, overwrite string) {
 	}
 }
 
-// isFav checks the network interface's name and if it's a typical main one (like "eth0") it returns true.
+// isFav checks the network interface's name and if it's a typical main one (like "eth0" on Linux) it returns true.
+//
+// Note: All possible runtime.GOOS values are listed here: https://golang.org/doc/install/source#environment
 func isFav(iface net.Interface) bool {
-	if iface.Name == "eth0" ||
-		iface.Name == "wlan0" ||
-		len(iface.Name) >= 8 && iface.Name[:8] == "Ethernet" {
-		return true
+	switch runtime.GOOS {
+	case "windows":
+		if iface.Name == "WiFi" ||
+			len(iface.Name) >= 8 && iface.Name[:8] == "Ethernet" {
+			return true
+		}
+	case "darwin":
+		if iface.Name == "en0" || iface.Name == "en1" {
+			return true
+		}
+	case "linux":
+		if iface.Name == "eth0" || iface.Name == "wlan0" {
+			return true
+		}
 	}
 	return false
 }
