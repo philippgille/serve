@@ -5,7 +5,7 @@ serve
 
 `serve` starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues.
 
-It's based on [this Gist](https://gist.github.com/paulmach/7271283/2a1116ca15e34ee23ac5a3a87e2a626451424993) by [Paul Mach](https://github.com/paulmach).
+It's based on [a Gist](https://gist.github.com/paulmach/7271283/2a1116ca15e34ee23ac5a3a87e2a626451424993) by [Paul Mach](https://github.com/paulmach).
 
 Contents
 --------
@@ -17,6 +17,7 @@ Contents
 - [Use](#use)
     - [Example](#example)
 - [Build](#build)
+    - [Packages](#packages)
 
 Install
 -------
@@ -71,6 +72,8 @@ For other Linux distributions check [Install snapd](https://docs.snapcraft.io/co
 Then, to install `serve`, just run:
 
 `sudo snap install serve`
+
+You can also have a look at the description in the Snap Store on [https://snapcraft.io/serve](https://snapcraft.io/serve).
 
 If you don't want to use Snap, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
 
@@ -139,6 +142,8 @@ There are also build scripts for Windows and Linux for creating release artifact
 - Windows: `.\build.ps1`
 - Linux: `./build.sh`
 
+> Note: They require Go and UPX to be installed
+
 ### Packages
 
 For Scoop and Homebrew no packages need to be built. They use "manifests"/"formulae" and the binaries from GitHub Releases.
@@ -153,5 +158,5 @@ Or when Snapcraft isn't installed, but Docker is:
 
 To release the snap into the public Snap channels:
 
-`snapcraft login`
+`snapcraft login`  
 `snapcraft push serve_0.2.0_amd64.snap --release`
