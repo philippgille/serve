@@ -1,0 +1,21 @@
+name: serve
+version: "0.2.0"
+summary: serve starts a simple temporary static file server in your current directory # 79 char long summary
+description: |
+    serve starts a simple temporary static file server in your current directory
+    and prints your IP address to share with colleagues.
+
+    Just hit Ctrl+C to stop the server when you're finished sharing your files.
+
+grade: stable # devel or stable. strict for releasing to the candidate/stable channel
+confinement: strict # devmode or strict. strict once you have the right plugs and slots
+
+parts:
+  serve:
+    source: .
+    plugin: go
+    go-importpath: github.com/philippgille/serve
+
+apps:
+  serve:
+    command: serve
