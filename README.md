@@ -87,16 +87,16 @@ Serving "." on all network interfaces (0.0.0.0) on HTTP port: 8100
 
 Local network interfaces and their IP address so you can pass one to your colleagues:
 
-   Interface    |  IPv4 Address   | IPv6 Address   
-----------------|-----------------|----------------
-lo              | 127.0.0.1       | ::1
-eth0            |                 | 
-wlan0           | 192.168.178.123 | fe80::e7b:fdaf:ae5d:3cfa
-virbr0          | 192.168.122.1   | 
-br-8ef347e8a4e9 | 172.22.0.1      | fe80::42:c9ff:fed3:35a
-docker_gwbridge | 172.21.0.1      | 
-docker0         | 172.17.0.1      | fe80::42:c6cf:fe3d:a554
-veth0d522f4     |                 | fe80::307a:7fcf:fe3d:cba4
+      Interface      |  IPv4 Address   |              IPv6 Address
+---------------------|-----------------|----------------------------------------
+lo                   | 127.0.0.1       | ::1
+eth0                 |                 | 
+wlan0                | 192.168.178.123 | fe80::e7b:fdaf:ae5d:3cfa
+virbr0               | 192.168.122.1   | 
+br-8ef347e8a4e9      | 172.22.0.1      | fe80::42:c9ff:fed3:35a
+docker_gwbridge      | 172.21.0.1      | 
+docker0              | 172.17.0.1      | fe80::42:c6cf:fe3d:a554
+veth0d522f4          |                 | fe80::307a:7fcf:fe3d:cba4
 
 You probably want to share:
 http://192.168.178.123:8100

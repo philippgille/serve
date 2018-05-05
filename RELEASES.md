@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+- Improved: Increased interface table width to 80 for long interface names
+
 v0.2.0 (2018-05-01)
 -------------------
 

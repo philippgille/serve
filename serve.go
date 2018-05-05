@@ -67,19 +67,15 @@ func printAddrs(port string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// We want the interface + IP address list to look like a table:
-	//    Interface    |  IPv4 Address   |  IPv6 Address
-	// ----------------|-----------------|-------------------
-	// eth0            | 192.168.178.123 | ...
-	//
-	// "docker_gwbridge" and other Docker interfaces like "br-2b303075a67e" have 15 characters.
-	// 123.123.123.123 are also 15 characters.
-	// the IPv6 Address can be open ended, because its the rightmost value
-	fmt.Println("   Interface    |  IPv4 Address   | IPv6 Address   ")
-	fmt.Println("----------------|-----------------|----------------")
+	// We want the interface + IP address list to look like a table with a width of 80:
+	//       Interface      |  IPv4 Address   |              IPv6 Address
+	// ---------------------|-----------------|----------------------------------------
+	// vEthernet (Standan.. | 192.168.178.123 | 1a23:850a:bf55:39a9:6dae:c378:9deb:5aff
+	fmt.Println("      Interface      |  IPv4 Address   |              IPv6 Address              ")
+	fmt.Println("---------------------|-----------------|----------------------------------------")
 	fav := ""
 	for _, iface := range ifaces {
-		fmt.Printf("%-15v |", cutString(iface.Name, 15))
+		fmt.Printf("%-20v |", cutString(iface.Name, 20))
 		addrs, err := iface.Addrs()
 		if err != nil {
 			log.Fatal(err)
