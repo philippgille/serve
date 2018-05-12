@@ -19,3 +19,6 @@ parts:
 apps:
   serve:
     command: serve
+    plugs:
+      - network-bind # For acting as HTTP server
+      - home # For access to the user's $HOME directory, needed to serve its files

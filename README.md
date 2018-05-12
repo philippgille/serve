@@ -75,6 +75,8 @@ Then, to install `serve`, just run:
 
 You can also have a look at the description in the Snap Store on [https://snapcraft.io/serve](https://snapcraft.io/serve).
 
+> Note: Due to restrictions by Snap, `serve` can only serve files in the user's `$HOME` directory.
+
 If you don't want to use Snap, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
 
 Use

@@ -10,6 +10,7 @@ vNext
 
 - Improved: Increased interface table width to 80 for long interface names
 - Fixed: No suggested URL in several cases ([issue #7](https://github.com/philippgille/serve/issues/7))
+- Fixed: Snap package doesn't work ([issue #14](https://github.com/philippgille/serve/issues/14))
 
 v0.2.0 (2018-05-01)
 -------------------
