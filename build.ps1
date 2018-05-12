@@ -89,3 +89,13 @@ Rename-Item "${artifactsDir}\serve" "${artifactsDir}\serve_v${version}_macOS_x64
 Copy-Item "${artifactsDir}\serve_v${version}_Linux_x64\serve" "${artifactsDir}\serve"
 Remove-Item -Recurse -Force "${artifactsDir}\serve_v${version}_Linux_x64"
 Rename-Item "${artifactsDir}\serve" "${artifactsDir}\serve_v${version}_Linux_x64"
+
+# Generate hashes and save as file.
+# Archives
+(Get-FileHash "${artifactsDir}\serve_v${version}_Windows_x64.exe").Hash | Out-File "${artifactsDir}\serve_v${version}_Windows_x64.exe.sha256" -NoNewline
+(Get-FileHash "${artifactsDir}\serve_v${version}_macOS_x64").Hash | Out-File "${artifactsDir}\serve_v${version}_macOS_x64.sha256" -NoNewline
+(Get-FileHash "${artifactsDir}\serve_v${version}_Linux_x64").Hash | Out-File "${artifactsDir}\serve_v${version}_Linux_x64.sha256" -NoNewline
+# Binaries
+(Get-FileHash "${artifactsDir}\serve_v${version}_Windows_x64.zip").Hash | Out-File "${artifactsDir}\serve_v${version}_Windows_x64.zip.sha256" -NoNewline
+(Get-FileHash "${artifactsDir}\serve_v${version}_macOS_x64.zip").Hash | Out-File "${artifactsDir}\serve_v${version}_macOS_x64.zip.sha256" -NoNewline
+(Get-FileHash "${artifactsDir}\serve_v${version}_Linux_x64.zip").Hash | Out-File "${artifactsDir}\serve_v${version}_Linux_x64.zip.sha256" -NoNewline

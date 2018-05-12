@@ -55,3 +55,13 @@ mv "${ARTIFACTSDIR}/serve" "${ARTIFACTSDIR}/serve_v${VERSION}_macOS_x64"
 cp "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_x64/serve" "${ARTIFACTSDIR}/serve"
 rm -rf "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_x64"
 mv "${ARTIFACTSDIR}/serve" "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_x64"
+
+# Generate hashes and save as file.
+# Archives
+echo -n $(sha256sum "${ARTIFACTSDIR}/serve_v${VERSION}_Windows_x64.tar.gz" | cut -d " " -f 1) > "${ARTIFACTSDIR}/serve_v${VERSION}_Windows_x64.tar.gz.sha256"
+echo -n $(sha256sum "${ARTIFACTSDIR}/serve_v${VERSION}_macOS_x64.tar.gz" | cut -d " " -f 1) > "${ARTIFACTSDIR}/serve_v${VERSION}_macOS_x64.tar.gz.sha256"
+echo -n $(sha256sum "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_x64.tar.gz" | cut -d " " -f 1) > "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_x64.tar.gz.sha256"
+# Binaries
+echo -n $(sha256sum "${ARTIFACTSDIR}/serve_v${VERSION}_Windows_x64.exe" | cut -d " " -f 1) > "${ARTIFACTSDIR}/serve_v${VERSION}_Windows_x64.exe.sha256"
+echo -n $(sha256sum "${ARTIFACTSDIR}/serve_v${VERSION}_macOS_x64" | cut -d " " -f 1) > "${ARTIFACTSDIR}/serve_v${VERSION}_macOS_x64.sha256"
+echo -n $(sha256sum "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_x64" | cut -d " " -f 1) > "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_x64.sha256"
