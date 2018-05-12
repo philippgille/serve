@@ -1,6 +1,19 @@
 #!/bin/bash
 
+# Script for building the serve binaries.
+# 6 artifacts are built: A binary for Windows, macOS and Linux (all x64) and an archive of each.
+#
+# Example: "./build.sh"
+# Example for building without UPX compression: "./build.sh noupx"
+
 set -euxo pipefail
+
+# Parameters
+if [[ $# -eq 1 && "$1" == "noupx" ]]; then
+    NO_UPX=true
+else
+    NO_UPX=false
+fi
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -18,9 +31,11 @@ GOOS=linux GOARCH=amd64 go build -v -o "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_
 
 # Shrink binaries with UPX.
 # Requires UPX to be installed (for example with "apt install upx-ucl").
-upx --ultra-brute "${ARTIFACTSDIR}/serve_v${VERSION}_Windows_x64/serve.exe"
-upx --ultra-brute "${ARTIFACTSDIR}/serve_v${VERSION}_macOS_x64/serve"
-upx --ultra-brute "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_x64/serve"
+if [[ "$NO_UPX" == "false" ]]; then
+    upx --ultra-brute "${ARTIFACTSDIR}/serve_v${VERSION}_Windows_x64/serve.exe"
+    upx --ultra-brute "${ARTIFACTSDIR}/serve_v${VERSION}_macOS_x64/serve"
+    upx --ultra-brute "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_x64/serve"
+fi
 
 # Create an archive for each of the "serve" binaries, so when users extract the archive, they don't have to rename it
 declare -a arr=("Windows" "macOS" "Linux")

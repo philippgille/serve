@@ -1,5 +1,12 @@
+# Script for building the serve binaries.
+# 6 artifacts are built: A binary for Windows, macOS and Linux (all x64) and an archive of each.
+#
+# Example: ".\build.ps1"
+# Example for building without UPX compression: ".\build.ps1 -noUpx"
+
 param (
-    [switch] $isAppVeyor
+    [switch] $isAppVeyor,
+    [switch] $noUpx
 )
 
 $ErrorActionPreference = "Stop"
@@ -46,9 +53,12 @@ $env:GOARCH = $go_arch_backup
 
 # Shrink binaries with UPX.
 # Requires UPX to be installed (for example with "choco install upx" or "scoop install upx").
-upx --ultra-brute "${artifactsDir}\serve_v${version}_Windows_x64\serve.exe"
-upx --ultra-brute "${artifactsDir}\serve_v${version}_macOS_x64\serve"
-upx --ultra-brute "${artifactsDir}\serve_v${version}_Linux_x64\serve"
+if (!$noUpx.IsPresent)
+{
+    upx --ultra-brute "${artifactsDir}\serve_v${version}_Windows_x64\serve.exe"
+    upx --ultra-brute "${artifactsDir}\serve_v${version}_macOS_x64\serve"
+    upx --ultra-brute "${artifactsDir}\serve_v${version}_Linux_x64\serve"
+}
 
 # Create an archive for each of the "serve" binaries, so when users extract the archive, they don't have to rename it
 $archiveDirs = "${artifactsDir}\serve_v${version}_Windows_x64",
