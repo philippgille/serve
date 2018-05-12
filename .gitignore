@@ -20,7 +20,8 @@
 
 # Build artifacts
 serve
-/artifacts
+serve.exe
+/build/artifacts
 
 # Visual Studio Code debug files
 debug

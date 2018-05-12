@@ -11,8 +11,9 @@ before_install:
 
 script:
   - go build
-  - ./build.sh
+  - build/build.sh
   # test
   - ./serve -v
   - ./serve -t
-  - artifacts/serve_v*_Linux_x64 -v
+  - build/artifacts/serve_v*_Linux_x64 -v
+  - build/artifacts/serve_v*_Linux_x64 -t

@@ -18,7 +18,7 @@ fi
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 ARTIFACTSDIR="$SCRIPTDIR/artifacts"
-VERSION=$(<$SCRIPTDIR/VERSION)
+VERSION=$(<$SCRIPTDIR/../VERSION)
 
 # Clean up the previous build
 rm -rf ${ARTIFACTSDIR}

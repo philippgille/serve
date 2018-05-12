@@ -93,7 +93,7 @@ Usage of serve:
   -v    Print the version
 ```
 
-Hit `Ctrl+C` in the terminal to stop the server.
+Press `Ctrl+C` in the terminal to stop the server.
 
 ### Example
 
@@ -141,10 +141,14 @@ To also make `serve` available as command in other directories:
 
 There are also build scripts for Windows and Linux for creating release artifacts (shrinked binaries for Windows, macOS and Linux):
 
-- Windows: `.\build.ps1`
-- Linux: `./build.sh`
+- Windows: `build/build.ps1`
+- Linux: `build/build.sh`
 
 > Note: They require Go and UPX to be installed
+
+To build with a Docker container:
+
+`docker run --rm -v ${PWD}:/go/src/github.com/philippgille/serve -w /go/src/github.com/philippgille/serve golang build/build.sh noupx`
 
 ### Packages
 

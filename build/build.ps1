@@ -12,7 +12,7 @@ param (
 $ErrorActionPreference = "Stop"
 
 $artifactsDir = "${PSScriptRoot}\artifacts"
-$version = Get-Content ${PSScriptRoot}\VERSION
+$version = Get-Content ${PSScriptRoot}\..\VERSION
 
 # Clean up the previous build
 If (Test-Path "${artifactsDir}") {Remove-Item -Recurse -Force "${artifactsDir}"}
