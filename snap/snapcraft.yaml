@@ -5,16 +5,30 @@ description: |
     serve starts a simple temporary static file server in your current directory
     and prints your IP address to share with colleagues.
 
-    Just hit Ctrl+C to stop the server when you're finished sharing your files.
+    Run `serve -h` to print its usage.
+
+    Press Ctrl+C in the terminal to stop the server.
 
 grade: stable # devel or stable. strict for releasing to the candidate/stable channel
 confinement: strict # devmode or strict. strict once you have the right plugs and slots
 
 parts:
+  # Go isn't needed as a library, but the default Go version for building the snap is 1.6
+  # and only with specifying Go as part we can set a newer version.
+  # It does NOT get added as library in the final snap.
+  # Note: This significantly increases the build duration!
+  go:
+    source-depth: 1
+    source-tag: go1.10.1
   serve:
-    source: .
+    after: [go]
     plugin: go
     go-importpath: github.com/philippgille/serve
+    # Using the repository instead of "." makes it possible to use this file standalone
+    # and also leads to reproducable builds thanks to the tag.
+    source: https://github.com/philippgille/serve.git
+    source-depth: 1
+    source-tag: v0.2.0
 
 apps:
   serve:
