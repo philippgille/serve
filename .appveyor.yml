@@ -22,8 +22,8 @@ test_script:
   - .\serve.exe -v
   - .\serve.exe -t
   # Use PowerShell for glob. ".\" is necessary in this case.
-  - ps: build\artifacts\serve_v*_Windows_x64.exe -v
-  - ps: build\artifacts\serve_v*_Windows_x64.exe -t
+  - ps: .\build\artifacts\serve_v*_Windows_x64.exe -v
+  - ps: .\build\artifacts\serve_v*_Windows_x64.exe -t
 
 artifacts:
 - path: build\artifacts\*
