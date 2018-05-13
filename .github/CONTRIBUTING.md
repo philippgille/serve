@@ -34,3 +34,22 @@ Know how to fix something? We love pull requests! Here's a quick guide:
 3. Push the change (we recommend using a separate branch for your feature).
 4. Open a pull request.
 5. We try to merge and deploy changes as soon as possible, or at least leave some feedback, but if you haven't heard back from us after a couple of days, feel free to leave a comment on the pull request.
+
+## Tips
+
+- When working on Windows, but moving or adding a Linux Bash script, you must make sure the script is executable on Linux:
+    ```bash
+    # Check file permissions:
+    $ git ls-files --stage
+    ...
+    100644 7f4552c7ac8f30e8b5cb5047f03a5969ee61344b 0       build/build.sh
+    ...
+    # The "100644" must be "100755"
+    # Make file executable:
+    $ git update-index --chmod=+x 'build-snap-with-docker.sh'
+    # Check again:
+    $ git ls-files --stage
+    ...
+    100755 7f4552c7ac8f30e8b5cb5047f03a5969ee61344b 0       build/build.sh
+    ...
+    ```

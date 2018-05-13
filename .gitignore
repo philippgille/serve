@@ -25,3 +25,10 @@ serve.exe
 
 # Visual Studio Code debug files
 debug
+
+# Snap build
+/parts
+/prime
+/stage
+/snap/.snapcraft
+/*.snap

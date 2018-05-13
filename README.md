@@ -154,15 +154,16 @@ To build with a Docker container:
 
 For Scoop and Homebrew no packages need to be built. They use "manifests"/"formulae" and the binaries from GitHub Releases.
 
-For Snap a Git hook is set up in the Snapcraft dashboard to automatically build a new Snap on every commit, but the package can also be built manually with:
+For releasing a new version, they need to be updated here:
 
-`snapcraft`
+- Scoop: https://github.com/lukesampson/scoop-extras/blob/master/serve.json
+- Homebrew: https://github.com/philippgille/homebrew-tap/blob/master/serve.rb
 
-Or when Snapcraft isn't installed, but Docker is:
+For Snap a Git hook is set up in the Snapcraft dashboard to automatically build a new Snap on every commit, so for releasing a new version the file in *this* repository needs to be updated:
 
-`docker run --rm -v ${pwd}:/build/serve -w /build/serve snapcraft/xenial-amd64 snapcraft`
+- Snap: https://github.com/philippgille/serve/blob/master/snap/snapcraft.yaml
 
-To release the snap into the public Snap channels:
+The Snap package can also be built manually, for example with this Bash script which utilizes Docker:
 
-`snapcraft login`  
-`snapcraft push serve_0.2.0_amd64.snap --release`
+- Windows: `build\build-snap-with-docker.ps1`
+- Linux: `build/build-snap-with-docker.sh`
