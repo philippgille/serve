@@ -23,7 +23,7 @@ Follow these steps manually, or jump below for the PowerShell commands:
     - Create a function that calls the binary in your shell's profile
         - The PowerShell profile is located at `$profile`
             - Example: `C:\Users\John\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
-        - Example function: `function serve { $env:USERPROFILE\Downloads\serve_v0.2.0_Windows_x64\serve.exe $args }`
+        - Example function: `function serve { $env:USERPROFILE\Downloads\serve_v0.2.1_Windows_x64\serve.exe $args }`
         - Don't forget to load your profile afterwards with `. $profile`
 
 As PowerShell commands:

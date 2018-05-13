@@ -1,5 +1,5 @@
 name: serve
-version: "0.2.0"
+version: "0.2.1"
 summary: serve starts a simple temporary static file server in your current directory # 79 char long summary
 description: |
     serve starts a simple temporary static file server in your current directory
@@ -28,7 +28,7 @@ parts:
     # and also leads to reproducable builds thanks to the tag.
     source: https://github.com/philippgille/serve.git
     source-depth: 1
-    source-tag: v0.2.0
+    source-tag: v0.2.1
 
 apps:
   serve:

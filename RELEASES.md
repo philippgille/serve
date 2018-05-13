@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+v0.2.1 (2018-05-13)
+-------------------
+
 - Improved: Increased interface table width to 80 for long interface names
 - Fixed: No suggested URL in several cases ([issue #7](https://github.com/philippgille/serve/issues/7))
 - Fixed: Snap package doesn't work ([issue #14](https://github.com/philippgille/serve/issues/14))
