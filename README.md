@@ -156,12 +156,12 @@ For Scoop and Homebrew no packages need to be built. They use "manifests"/"formu
 
 For releasing a new version, they need to be updated here:
 
-- Scoop: https://github.com/lukesampson/scoop-extras/blob/master/serve.json
-- Homebrew: https://github.com/philippgille/homebrew-tap/blob/master/serve.rb
+- Scoop: [https://github.com/lukesampson/scoop/blob/master/bucket/serve.json](https://github.com/lukesampson/scoop/blob/master/bucket/serve.json)
+- Homebrew: [https://github.com/philippgille/homebrew-tap/blob/master/serve.rb](https://github.com/lukesampson/scoop/blob/master/bucket/serve.json)
 
 For Snap a Git hook is set up in the Snapcraft dashboard to automatically build a new Snap on every commit, so for releasing a new version the file in *this* repository needs to be updated:
 
-- Snap: https://github.com/philippgille/serve/blob/master/snap/snapcraft.yaml
+- Snap: [https://github.com/philippgille/serve/blob/master/snap/snapcraft.yaml](https://github.com/philippgille/serve/blob/master/snap/snapcraft.yaml)
 
 The Snap package can also be built manually, for example with this Bash script which utilizes Docker:
 

@@ -8,7 +8,10 @@
         "github": "https://github.com/philippgille/serve"
     },
     "autoupdate": {
-        "url": "https://github.com/philippgille/serve/releases/download/v$version/serve_v$version_Windows_x64.zip"
+        "url": "https://github.com/philippgille/serve/releases/download/v$version/serve_v$version_Windows_x64.zip",
+        "hash": {
+            "url": "$url.sha256"
+        }
     },
     "notes": "Thank you for installing serve! Type `serve -h` to print its usage."
 }
