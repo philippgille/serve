@@ -42,7 +42,17 @@ Then, to install `serve`, just run:
 
 `scoop install serve`
 
-If you don't want to use Scoop, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
+Another option is [Chocolatey](https://chocolatey.org/).
+
+If you haven't installed it yet, you can do so in an *administrative* shell with:
+
+`Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))`
+
+Then, to install `serve`, just run:
+
+`choco install serve --source https://www.myget.org/F/serve/api/v2`
+
+If you don't want to use Scoop or Chocolatey, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
 
 ### macOS
 
@@ -56,6 +66,10 @@ Then, to install `serve`, just run:
 
 `brew tap philippgille/tap`  
 `brew install serve`
+
+Or in a single command:
+
+`brew install philippgille/tap/serve`
 
 If you don't want to use Homebrew, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
 
@@ -148,7 +162,7 @@ There are also build scripts for Windows and Linux for creating release artifact
 
 To build with a Docker container:
 
-`docker run --rm -v ${PWD}:/go/src/github.com/philippgille/serve -w /go/src/github.com/philippgille/serve golang build/build.sh noupx`
+`docker run --rm -v ${PWD}:/go/src/github.com/philippgille/serve -w /go/src/github.com/philippgille/serve golang build/build.sh noupx`  
 
 ### Packages
 
@@ -163,7 +177,11 @@ For Snap a Git hook is set up in the Snapcraft dashboard to automatically build 
 
 - Snap: [https://github.com/philippgille/serve/blob/master/snap/snapcraft.yaml](https://github.com/philippgille/serve/blob/master/snap/snapcraft.yaml)
 
-The Snap package can also be built manually, for example with this Bash script which utilizes Docker:
+The Snap package can also be built manually, for example with this script which utilizes Docker:
 
 - Windows: `build\build-snap-with-docker.ps1`
 - Linux: `build/build-snap-with-docker.sh`
+
+The Chocolatey packages can be built with this script:
+
+- Windows: `build\build-chocolatey.ps1`

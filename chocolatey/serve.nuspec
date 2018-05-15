@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <!-- Required metadata elements (according to https://docs.microsoft.com/en-us/nuget/schema/nuspec) -->
+
+    <!-- id is lowercase and if you want a good separator for words, use '-', not '.'. Dots are only acceptable as suffixes for certain types of packages, e.g. .install, .portable, .extension, .template -->
+    <!-- If the software is cross-platform, attempt to use the same id as the debian/rpm package(s) if possible. -->
+    <id>serve</id>
+    <!-- version should MATCH as closely as possible with the underlying software -->
+    <!-- Is the version a prerelease of a version? https://docs.nuget.org/create/versioning#creating-prerelease-packages -->
+    <!-- Note that unstable versions like 0.0.1 can be considered a released version, but it's possible that one can release a 0.0.1-beta before you release a 0.0.1 version. If the version number is final, that is considered a released version and not a prerelease. -->
+    <version>0.2.1</version>
+    <!-- Markdown okay -->
+    <description>`serve` starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues</description>
+    <authors>Philipp Gillé</authors>
+
+    <!-- Optional metadata elements (according to https://docs.microsoft.com/en-us/nuget/schema/nuspec) -->
+
+    <title>serve</title>
+    <!-- owners is a poor name for maintainers of the package. It sticks around by this name for compatibility reasons. It basically means you. -->
+    <owners>Philipp Gillé</owners>
+    <!-- projectUrl is required for the community feed -->
+    <projectUrl>https://github.com/philippgille/serve</projectUrl>
+    <!-- If there is a license Url available, it is required for the community feed -->
+    <licenseUrl>https://raw.githubusercontent.com/philippgille/serve/master/LICENSE</licenseUrl>
+    <!--<iconUrl>http://cdn.rawgit.com/__REPLACE_YOUR_REPO__/master/icons/hwapp.png</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>`serve` starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues</summary>
+    <!-- Markdown okay -->
+    <!--<releaseNotes>0.1.0: Initial release</releaseNotes>-->
+    <!-- Year Software Vendor -->
+    <copyright>Copyright (c) 2018 Philipp Gillé</copyright>
+    <tags>cli serve server file-server static-files static-file-server</tags>
+
+    <!-- Metadata elements only usable by chocolatey tools -->
+
+    <!-- Software Source Location - is the software FOSS somewhere? Link to it with this -->
+    <projectSourceUrl>https://github.com/philippgille/serve</projectSourceUrl>
+    <!-- At what url are the software docs located? -->
+    <docsUrl>https://github.com/philippgille/serve/blob/master/chocolatey/README.md</docsUrl>
+    <!--<mailingListUrl></mailingListUrl>-->
+    <bugTrackerUrl>https://github.com/philippgille/serve/issues</bugTrackerUrl>
+    <!-- Where is this Chocolatey package located (think GitHub)? packageSourceUrl is highly recommended for the community feed -->
+    <packageSourceUrl>https://github.com/philippgille/serve</packageSourceUrl>
+
+    <!-- Dependency element for meta package -->
+    <dependencies>
+      <dependency id="serve.portable" version="[0.2.1]" />
+    </dependencies>
+  </metadata>
+  <!-- this section controls what actually gets packaged into the Chocolatey package -->
+  <files>
+    <!-- No files, because this is just a meta package "pointing" to hello-netcoreapp.portable -->
+  </files>
+</package>
