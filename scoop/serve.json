@@ -13,5 +13,6 @@
             "url": "$url.sha256"
         }
     },
+    "license": "MPL-2.0",
     "notes": "Thank you for installing serve! Type `serve -h` to print its usage."
 }
