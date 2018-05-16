@@ -14,6 +14,7 @@ Contents
     - [Windows](#windows)
     - [macOS](#macos)
     - [Linux](#linux)
+    - [Manually](#manually)
 - [Docker](#docker)
 - [Use](#use)
     - [Example](#example)
@@ -23,47 +24,23 @@ Contents
 Install
 -------
 
-With Go installed:
+We recommend installing `serve` with one of the following package managers, because they provide you with functionality such as automatic updates, instant availability as command in the `PATH`, easy removal, sandboxing etc.
 
-`go get github.com/philippgille/serve`
-
-> Note: Requires your `$GOPATH/bin` directory to be in your `PATH`, which is usually the case.
-
-Without Go installed:
+But alternatively you can always install `serve` manually as well, see [Manually](#manually).
 
 ### Windows
 
-The easiest way is to use the package manager [Scoop](http://scoop.sh/).
-
-I can highly recommend it. If you haven't installed it yet, you can do so with:
-
-`iex (new-object net.webclient).downloadstring('https://get.scoop.sh')`
-
-Then, to install `serve`, just run:
+The easiest way is to use the package manager [Scoop](http://scoop.sh/):
 
 `scoop install serve`
 
-Another option is [Chocolatey](https://chocolatey.org/).
-
-If you haven't installed it yet, you can do so in an *administrative* shell with:
-
-`Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))`
-
-Then, to install `serve`, just run:
+Another option is [Chocolatey](https://chocolatey.org/):
 
 `choco install serve --source https://www.myget.org/F/serve/api/v2`
 
-If you don't want to use Scoop or Chocolatey, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
-
 ### macOS
 
-The easiest way is to use the package manager [Homebrew](https://brew.sh/).
-
-It's the most popular package manager on macOS. If you haven't installed it yet, you can do so with:
-
-`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-
-Then, to install `serve`, just run:
+The easiest way is to use the package manager [Homebrew](https://brew.sh/):
 
 `brew tap philippgille/tap`  
 `brew install serve`
@@ -72,19 +49,9 @@ Or in a single command:
 
 `brew install philippgille/tap/serve`
 
-If you don't want to use Homebrew, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
-
 ### Linux
 
-The easiest way is to use the package manager [Snap](https://snapcraft.io/).
-
-It's already installed on Ubuntu 16.04 and later. On Ubuntu 14.04 you can install it with:
-
-`sudo apt install snapd`
-
-For other Linux distributions check [Install snapd](https://docs.snapcraft.io/core/install).
-
-Then, to install `serve`, just run:
+The easiest way is to use the package manager [Snap](https://snapcraft.io/), which is installed by default on Ubuntu 16.04 and later:
 
 `sudo snap install serve`
 
@@ -92,7 +59,17 @@ You can also have a look at the description in the Snap Store on [https://snapcr
 
 > Note: Due to restrictions by Snap, `serve` can only serve files in the user's `$HOME` directory.
 
-If you don't want to use Snap, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
+### Manually
+
+#### With Go installed
+
+`go get github.com/philippgille/serve`
+
+> Note: Requires your `$GOPATH/bin` directory to be in your `PATH`, which is usually the case.
+
+#### Without Go installed
+
+You can download the binary for your OS from the [releases](https://github.com/philippgille/serve/releases) simply make it available as command in your `PATH`. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
 
 Docker
 ------
