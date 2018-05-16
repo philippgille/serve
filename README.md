@@ -14,6 +14,7 @@ Contents
     - [Windows](#windows)
     - [macOS](#macos)
     - [Linux](#linux)
+- [Docker](#docker)
 - [Use](#use)
     - [Example](#example)
 - [Build](#build)
@@ -92,6 +93,17 @@ You can also have a look at the description in the Snap Store on [https://snapcr
 > Note: Due to restrictions by Snap, `serve` can only serve files in the user's `$HOME` directory.
 
 If you don't want to use Snap, you can download the binary from the [releases](https://github.com/philippgille/serve/releases) and install `serve` manually. See [Manual Installation](https://github.com/philippgille/serve/tree/master/docs#manual-installation) for details.
+
+Docker
+------
+
+`serve` is also available as Docker image in the Docker Hub: [https://hub.docker.com/r/philippgille/serve/](https://hub.docker.com/r/philippgille/serve/)
+
+To start the Docker container, just run:
+
+`docker run -v ${PWD}:/share --network "host" philippgille/serve`
+
+`-d "/share"` is used as default flag, but you can overwrite it with any other flag. For all flags, see [Usage](#usage) below.
 
 Use
 ---
@@ -185,3 +197,7 @@ The Snap package can also be built manually, for example with this script which 
 The Chocolatey packages can be built with this script:
 
 - Windows: `build\build-chocolatey.ps1`
+
+The Docker image can be built like this:
+
+`docker build -f docker/Dockerfile -t philippgille/serve .`
