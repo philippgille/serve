@@ -3,7 +3,7 @@
 
 `serve` starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues.
 
-Supported Linux amd64 tags and respective `Dockerfile` links
+Supported tags and respective `Dockerfile` links
 ------------------------------------------------
 
 - [`latest` (docker/Dockerfile)](https://github.com/philippgille/serve/blob/master/docker/Dockerfile)

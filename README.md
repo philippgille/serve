@@ -24,35 +24,29 @@ Contents
 Install
 -------
 
-We recommend installing `serve` with one of the following package managers, because they provide you with functionality such as automatic updates, instant availability as command in the `PATH`, easy removal, sandboxing etc.
-
+We recommend installing `serve` with one of the following package managers, because they provide you with functionality such as automatic updates, instant availability as command in the `PATH`, easy removal, sandboxing etc.  
 But alternatively you can always install `serve` manually as well, see [Manually](#manually).
 
 ### Windows
 
-The easiest way is to use the package manager [Scoop](http://scoop.sh/):
-
+The easiest way is to use the package manager [Scoop](http://scoop.sh/):  
 `scoop install serve`
 
-Another option is [Chocolatey](https://chocolatey.org/):
-
+Another option is [Chocolatey](https://chocolatey.org/):  
 `choco install serve --source https://www.myget.org/F/serve/api/v2`
 
 ### macOS
 
-The easiest way is to use the package manager [Homebrew](https://brew.sh/):
-
+The easiest way is to use the package manager [Homebrew](https://brew.sh/):  
 `brew tap philippgille/tap`  
 `brew install serve`
 
-Or in a single command:
-
+Or in a single command:  
 `brew install philippgille/tap/serve`
 
 ### Linux
 
-The easiest way is to use the package manager [Snap](https://snapcraft.io/), which is installed by default on Ubuntu 16.04 and later:
-
+The easiest way is to use the package manager [Snap](https://snapcraft.io/), which is installed by default on Ubuntu 16.04 and later:  
 `sudo snap install serve`
 
 You can also have a look at the description in the Snap Store on [https://snapcraft.io/serve](https://snapcraft.io/serve).
@@ -76,8 +70,7 @@ Docker
 
 `serve` is also available as Docker image in the Docker Hub: [https://hub.docker.com/r/philippgille/serve/](https://hub.docker.com/r/philippgille/serve/)
 
-To start the Docker container, just run:
-
+To start the Docker container, just run:  
 `docker run -v ${PWD}:/share --network "host" philippgille/serve`
 
 `-d "/share"` is used as default flag, but you can overwrite it with any other flag. For all flags, see [Usage](#usage) below.
@@ -152,6 +145,8 @@ There are also build scripts for Windows and Linux for creating release artifact
 To build with a Docker container:
 
 `docker run --rm -v ${PWD}:/go/src/github.com/philippgille/serve -w /go/src/github.com/philippgille/serve golang build/build.sh noupx`  
+Or with UPX:  
+`docker run --rm -v ${PWD}:/go/src/github.com/philippgille/serve -w /go/src/github.com/philippgille/serve golang bash -c "apt update && apt install -y upx-ucl && build/build.sh"`
 
 ### Packages
 
