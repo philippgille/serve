@@ -1,9 +1,9 @@
 version: "{build}"
 
+clone_folder: c:\gopath\src\github.com\philippgille\serve
+
 # GitHub specific alternative to `clone_depth: <number>`
 shallow_clone: true
-
-clone_folder: c:\gopath\src\github.com\philippgille\serve
 
 environment:
   GOPATH: c:\gopath
