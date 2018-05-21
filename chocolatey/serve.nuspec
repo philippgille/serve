@@ -27,7 +27,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>`serve` starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues</summary>
     <!-- Markdown okay -->
-    <!--<releaseNotes>0.1.0: Initial release</releaseNotes>-->
+    <releaseNotes>https://github.com/philippgille/serve/blob/master/RELEASES.md</releaseNotes>
     <!-- Year Software Vendor -->
     <copyright>Copyright (c) 2018 Philipp Gillé</copyright>
     <tags>cli serve server file-server static-files static-file-server</tags>

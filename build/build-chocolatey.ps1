@@ -11,7 +11,7 @@ If (Test-Path "$artifactsDir\serve_v${version}_Windows_x64.exe")
     # Create and clean directories
     mkdir "$PSScriptRoot\..\chocolatey\tools" -Force
     Remove-Item -Force "$artifactsDir\serve.*.nupkg"
-    Remove-Item -Force "$PSScriptRoot\..\chocolatey\tools\*"
+    Remove-Item -Force "$PSScriptRoot\..\chocolatey\tools\serve.exe"
     # Copy SCD files
     Copy-Item "$artifactsDir\serve_v${version}_Windows_x64.exe" "$PSScriptRoot\..\chocolatey\tools\serve.exe"
     # Build Chocolatey package
