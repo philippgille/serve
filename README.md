@@ -75,6 +75,8 @@ To start the Docker container, just run:
 
 `-d "/share"` is used as default flag, but you can overwrite it with any other flag. For all flags, see [Usage](#usage) below.
 
+> Note: When using Docker on Windows or macOS, it probably runs in a VM (Hyper-V on Windows Pro, VirtualBox on Windows Home). This means that the network interfaces and their IP addresses aren't the ones of your host machine, but the ones of the VM. These are usually not reachable from other peers in the network your host machine is in. You have to either change the VMs configuration or set up port forwarding on your host machine.
+
 Use
 ---
 
