@@ -33,7 +33,7 @@ The easiest way is to use the package manager [Scoop](http://scoop.sh/):
 `scoop install serve`
 
 Another option is [Chocolatey](https://chocolatey.org/):  
-`choco install serve --source https://www.myget.org/F/serve/api/v2`
+`choco install serve`
 
 ### macOS
 
@@ -168,7 +168,7 @@ The Snap package can also be built manually, for example with this script which 
 - Windows: `build\build-snap-with-docker.ps1`
 - Linux: `build/build-snap-with-docker.sh`
 
-The Chocolatey packages can be built with this script:
+The Chocolatey packages need to be uploaded manually to Chocolatey [here](https://chocolatey.org/packages/upload). The package can be built with this script:
 
 - Windows: `build\build-chocolatey.ps1`
 
