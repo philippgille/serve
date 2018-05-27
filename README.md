@@ -35,6 +35,8 @@ The easiest way is to use the package manager [Scoop](http://scoop.sh/):
 Another option is [Chocolatey](https://chocolatey.org/):  
 `choco install serve`
 
+You can also have a look at the description in the Chocolatey Gallery on [https://chocolatey.org/packages/serve/](https://chocolatey.org/packages/serve/).
+
 ### macOS
 
 The easiest way is to use the package manager [Homebrew](https://brew.sh/):  
