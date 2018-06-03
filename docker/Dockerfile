@@ -5,16 +5,16 @@
 
 # Builder image
 # Don't bother to clean up the image - it's only used for building
-FROM golang:1.10-alpine as builder
+FROM golang:1.12-alpine as builder
 
 RUN apk add --no-cache upx
 
-WORKDIR /go/src/serve
+WORKDIR /go/src/app
 COPY serve.go .
-RUN go env
-# x86 necessary for busybox
-RUN GOARCH=386 go build -ldflags="-s -w" -v
-RUN upx --ultra-brute "serve"
+
+# Disable cgo for BusyBox
+RUN CGO_ENABLED=0 go build -v -ldflags="-s -w"
+RUN upx --ultra-brute "app"
 
 # Runtime image
 # Should be run like so:
@@ -23,7 +23,7 @@ FROM busybox
 
 LABEL maintainer "Philipp Gille"
 
-COPY --from=builder /go/src/serve/serve ./
+COPY --from=builder /go/src/app/app serve
 
 RUN mkdir "/share"
 
