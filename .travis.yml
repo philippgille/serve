@@ -4,13 +4,15 @@ git:
 language: go
 
 go:
-  - "1.10"
+  - "1.12"
 
 before_install:
+  - go version
+  - go env
   - sudo apt-get install -y upx-ucl
 
 script:
-  - go build
+  - go build -v
   - build/build.sh
   # test
   - ./serve -v
