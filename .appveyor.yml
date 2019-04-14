@@ -8,6 +8,8 @@ shallow_clone: true
 environment:
   GOPATH: c:\gopath
 
+stack: go 1.12
+
 install:
   - go version
   - go env
@@ -15,7 +17,7 @@ install:
   - choco install upx
 
 build_script:
-  - go build
+  - go build -v
   - ps: build\build.ps1 -isAppVeyor
 
 test_script:
