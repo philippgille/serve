@@ -12,20 +12,21 @@ RUN apk add --no-cache upx
 WORKDIR /go/src/app
 COPY serve.go .
 
-# Disable cgo for BusyBox
+# Disable cgo for scratch
 RUN CGO_ENABLED=0 go build -v -ldflags="-s -w"
 RUN upx --ultra-brute "app"
 
 # Runtime image
 # Should be run like so:
 # docker run --rm -v ${PWD}:/share --network "host" philippgille/serve
-FROM busybox
+FROM scratch
 
 LABEL maintainer "Philipp Gille"
 
 COPY --from=builder /go/src/app/app serve
-
-RUN mkdir "/share"
+# Required to have an empty "share" directory.
+# `RUN mkdir /share` doesn't work in scratch.
+COPY --from=builder /var/empty /share
 
 VOLUME ["/share"]
 EXPOSE 8100
