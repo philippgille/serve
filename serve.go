@@ -33,6 +33,7 @@ const version = "v0.2.1"
 
 // Flags in alphabetical order, just like "-h" prints them
 var (
+	auth         = flag.String("a", "", `Require basic authentication with the given credentials (e.g. -a "alice:secret")`)
 	directory    = flag.String("d", ".", "The directory of static file to host")
 	port         = flag.String("p", "8100", "Port to serve on")
 	test         = flag.Bool("t", false, "Test / dry run (just prints the interface table)")
@@ -54,8 +55,18 @@ func main() {
 		os.Exit(0)
 	}
 
+	finalHandler := http.FileServer(http.Dir(*directory))
+
+	// If the "-a" flag was used, use basic authentication middleware
+	if *auth != "" {
+		if !strings.Contains(*auth, ":") {
+			log.Fatal(`When using the -a flag to add basic authentication, you must specify credentials in the form of "username:password". For example: "alice:secret".`)
+		}
+		finalHandler = withBasicAuth(finalHandler)
+	}
+
 	// Register handler for "/" in Go's DefaultServeMux
-	http.Handle("/", http.FileServer(http.Dir(*directory)))
+	http.Handle("/", finalHandler)
 
 	fmt.Printf("\nServing \"%s\" on all network interfaces (0.0.0.0) on HTTP port: %s\n", *directory, *port)
 
@@ -160,4 +171,21 @@ func isFav(iface net.Interface) bool {
 		}
 	}
 	return false
+}
+
+// withBasicAuth adds a basic authentication middleware before the passed handler.
+func withBasicAuth(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		username, password, ok := r.BasicAuth()
+		if !ok {
+			w.Header().Set("WWW-Authenticate", "Basic")
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		if username+":"+password != *auth {
+			w.WriteHeader(http.StatusForbidden)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
 }

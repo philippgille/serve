@@ -85,6 +85,8 @@ Use
 ```bash
 $ serve -h
 Usage of serve:
+  -a string
+        Require basic authentication with the given credentials (e.g. -a "alice:secret")
   -d string
         The directory of static file to host (default ".")
   -p string

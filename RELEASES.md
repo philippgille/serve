@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+- Added: Optional basic authentication ([issue #10](https://github.com/philippgille/serve/issues/10))
+
 v0.2.1 (2018-05-13)
 -------------------
 
