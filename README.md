@@ -89,6 +89,7 @@ Usage of serve:
         Require basic authentication with the given credentials (e.g. -a "alice:secret")
   -d string
         The directory of static file to host (default ".")
+  -h    Print the usage
   -p string
         Port to serve on (default "8100")
   -t    Test / dry run (just prints the interface table)

@@ -9,6 +9,7 @@ vNext
 -----
 
 - Added: Optional basic authentication ([issue #10](https://github.com/philippgille/serve/issues/10))
+- Improved: Made `-h` a valid flag for printing the usage, leading to exit code 0 instead of 2
 
 v0.2.1 (2018-05-13)
 -------------------

@@ -15,7 +15,9 @@ script:
   - go build -v
   - build/build.sh
   # test
+  - ./serve -h
   - ./serve -v
   - ./serve -t
+  - build/artifacts/serve_v*_Linux_x64 -h
   - build/artifacts/serve_v*_Linux_x64 -v
   - build/artifacts/serve_v*_Linux_x64 -t

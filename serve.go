@@ -35,6 +35,7 @@ const version = "v0.2.1"
 var (
 	auth         = flag.String("a", "", `Require basic authentication with the given credentials (e.g. -a "alice:secret")`)
 	directory    = flag.String("d", ".", "The directory of static file to host")
+	help         = flag.Bool("h", false, "Print the usage")
 	port         = flag.String("p", "8100", "Port to serve on")
 	test         = flag.Bool("t", false, "Test / dry run (just prints the interface table)")
 	printVersion = flag.Bool("v", false, "Print the version")
@@ -43,15 +44,23 @@ var (
 func main() {
 	flag.Parse()
 
-	// If the "v" flag was used, only print the version and exit
-	if *printVersion {
-		fmt.Printf("serve version: %v\n", version)
+	// If the "-h" flag was used, only print the usage and exit.
+	// Without the "-h" flag in the flag definitions "-h" would also print the usage,
+	// but only because it's an unknown flag and then exit with exit code 2 (instead of 0).
+	if *help {
+		flag.Usage()
 		os.Exit(0)
 	}
 
-	// If the "t" flag was used, only print the network interface table and exit
+	// If the "-t" flag was used, only print the network interface table and exit
 	if *test {
 		printAddrs(*port)
+		os.Exit(0)
+	}
+
+	// If the "-v" flag was used, only print the version and exit
+	if *printVersion {
+		fmt.Printf("serve version: %v\n", version)
 		os.Exit(0)
 	}
 
