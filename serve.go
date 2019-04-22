@@ -48,6 +48,10 @@ func main() {
 	// Without the "-h" flag in the flag definitions "-h" would also print the usage,
 	// but only because it's an unknown flag and then exit with exit code 2 (instead of 0).
 	if *help {
+		// flag.Usage() prints to stderr by default because it's usually called internally
+		// (in the flag package) when an invalid argument is used.
+		// But in our case it's meant to be printed, so print to stdout.
+		flag.CommandLine.SetOutput(os.Stdout)
 		flag.Usage()
 		os.Exit(0)
 	}
