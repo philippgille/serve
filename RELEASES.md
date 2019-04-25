@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+- Added: Optional generation and use of a self signed certificate to serve files via HTTPS instead of HTTP ([issue #9](https://github.com/philippgille/serve/issues/9))
 - Added: Optional basic authentication ([issue #10](https://github.com/philippgille/serve/issues/10))
 - Improved: Made `-h` a valid flag for printing the usage, leading to exit code 0 instead of 2
 

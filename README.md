@@ -92,6 +92,7 @@ Usage of serve:
   -h    Print the usage
   -p string
         Port to serve on (default "8100")
+  -s    Serve via HTTPS instead of HTTP. Creates a temporary self-signed certificate for localhost, 127.0.0.1, <hostname>.local, <hostname>.lan, <hostname>.home and the determined LAN IP address
   -t    Test / dry run (just prints the interface table)
   -v    Print the version
 ```

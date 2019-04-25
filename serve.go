@@ -17,6 +17,7 @@ Navigating to http://localhost:8100 will display the index.html or directory lis
 package main
 
 import (
+	"crypto/tls"
 	"flag"
 	"fmt"
 	"log"
@@ -37,6 +38,7 @@ var (
 	directory    = flag.String("d", ".", "The directory of static file to host")
 	help         = flag.Bool("h", false, "Print the usage")
 	port         = flag.String("p", "8100", "Port to serve on")
+	https        = flag.Bool("s", false, "Serve via HTTPS instead of HTTP. Creates a temporary self-signed certificate for localhost, 127.0.0.1, <hostname>.local, <hostname>.lan, <hostname>.home and the determined LAN IP address")
 	test         = flag.Bool("t", false, "Test / dry run (just prints the interface table)")
 	printVersion = flag.Bool("v", false, "Print the version")
 )
@@ -58,7 +60,7 @@ func main() {
 
 	// If the "-t" flag was used, only print the network interface table and exit
 	if *test {
-		printAddrs(*port)
+		printAddrs(*port, *https)
 		os.Exit(0)
 	}
 
@@ -81,17 +83,45 @@ func main() {
 	// Register handler for "/" in Go's DefaultServeMux
 	http.Handle("/", finalHandler)
 
-	fmt.Printf("\nServing \"%s\" on all network interfaces (0.0.0.0) on HTTP port: %s\n", *directory, *port)
+	scheme := "HTTP"
+	if *https {
+		scheme += "S"
+	}
+	fmt.Printf("\nServing \"%s\" on all network interfaces (0.0.0.0) on %v port: %s\n", *directory, scheme, *port)
 
 	// Print local network interfaces and their IP addresses
-	printAddrs(*port)
+	printAddrs(*port, *https)
 
-	log.Fatal(http.ListenAndServe(":"+*port, nil))
+	if *https {
+		cert, sans, err := generateCert()
+		if err != nil {
+			log.Fatalf("Couldn't generate TLS certificates: %v\n", err)
+		}
+		tlsConfig := &tls.Config{
+			MinVersion:               tls.VersionTLS12,
+			PreferServerCipherSuites: true,
+			Certificates:             []tls.Certificate{cert},
+		}
+		server := &http.Server{
+			Addr:      ":" + *port,
+			TLSConfig: tlsConfig,
+		}
+		fmt.Printf("\nTemporary self signed certificate valid for %v days for the following hostnames: %v\n", certValidityDurationDays, sans)
+		// TODO: Print the certificate fingerprint so the server can send it to the client via a secure channel
+		// and the client can then validate it to make sure it's not a different certificate created by a malicious actor (MitM).
+		// But first do some research regarding if the fingerprint is sufficient for that.
+		// Also the fingerprint should probably be a different one with each certificate generation,
+		// which didn't seem to be the case during my trials, but maybe I generated the fingerprint in the wrong way.
+		log.Fatal(server.ListenAndServeTLS("", ""))
+	} else {
+
+		log.Fatal(http.ListenAndServe(":"+*port, nil))
+	}
 }
 
 // printAddrs prints the local network interfaces and their IP addresses
-func printAddrs(port string) {
-	fmt.Println("\nLocal network interfaces and their IP addresses so you can pass one to your colleagues:\n")
+func printAddrs(port string, https bool) {
+	fmt.Println("\nLocal network interfaces and their IP addresses so you can pass one to your colleagues:")
 	ifaces, err := net.Interfaces()
 	if err != nil {
 		log.Fatal(err)
@@ -119,7 +149,11 @@ func printAddrs(port string) {
 
 	// Show probable favorite
 	if fav != "" {
-		fmt.Printf("\nYou probably want to share:\nhttp://%v:%v\n", fav, port)
+		scheme := "http"
+		if https {
+			scheme += "s"
+		}
+		fmt.Printf("\nYou probably want to share:\n%v://%v:%v\n", scheme, fav, port)
 	}
 }
 

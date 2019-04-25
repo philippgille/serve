@@ -10,7 +10,7 @@ FROM golang:1.12-alpine as builder
 RUN apk add --no-cache upx
 
 WORKDIR /go/src/app
-COPY serve.go .
+COPY *.go ./
 
 # Disable cgo for scratch
 RUN CGO_ENABLED=0 go build -v -ldflags="-s -w"
