@@ -4,7 +4,6 @@
 # https://docs.docker.com/engine/userguide/eng-image/multistage-build/
 
 # Builder image
-# Don't bother to clean up the image - it's only used for building
 FROM golang:1.12-alpine as builder
 
 RUN apk add --no-cache upx
@@ -17,19 +16,16 @@ RUN CGO_ENABLED=0 go build -v -ldflags="-s -w"
 RUN upx --ultra-brute "app"
 
 # Runtime image
-# Should be run like so:
-# docker run --rm -v ${PWD}:/share --network "host" philippgille/serve
 FROM scratch
 
 LABEL maintainer "Philipp Gille"
 
 COPY --from=builder /go/src/app/app serve
-# Required to have an empty "share" directory.
-# `RUN mkdir /share` doesn't work in scratch.
-COPY --from=builder /var/empty /share
+# Required to have an empty "srv" directory.
+# `RUN mkdir /srv` doesn't work in scratch.
+COPY --from=builder /var/empty /srv
 
-VOLUME ["/share"]
-EXPOSE 8080 8433
+VOLUME ["/srv"]
+EXPOSE 8080 8443
 
-ENTRYPOINT ["./serve"]
-CMD ["-d", "/share"]
+ENTRYPOINT ["./serve", "-d", "/srv"]

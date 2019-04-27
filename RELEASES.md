@@ -15,6 +15,9 @@ vNext
 ### Breaking changes:
 
 - Changed default port from 8100 to 8080, which is an official alternative to port 80 for HTTP
+- Docker:
+  - Changed default serving directory within the container from `/share` to `/srv`, which is a common directory for serving files
+  - Moved `-d` flag from `CMD` to `ENTRYPOINT`, leading to fewer problems when using the Docker container with additional flags
 
 v0.2.1 (2018-05-13)
 -------------------
