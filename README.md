@@ -82,16 +82,16 @@ To start the Docker container, just run:
 Use
 ---
 
-```bash
+```
 $ serve -h
 Usage of serve:
   -a string
         Require basic authentication with the given credentials (e.g. -a "alice:secret")
   -d string
-        The directory of static file to host (default ".")
+        The directory of static files to host (default ".")
   -h    Print the usage
   -p string
-        Port to serve on (default "8100")
+        Port to serve on. 8080 by default for HTTP, 8443 for HTTPS (when using the -s flag) (default "8080")
   -s    Serve via HTTPS instead of HTTP. Creates a temporary self-signed certificate for localhost, 127.0.0.1, <hostname>.local, <hostname>.lan, <hostname>.home and the determined LAN IP address
   -t    Test / dry run (just prints the interface table)
   -v    Print the version
@@ -104,7 +104,7 @@ Press `Ctrl+C` in the terminal to stop the server.
 ```bash
 ~/path/to/servable/files$ serve
 
-Serving "." on all network interfaces (0.0.0.0) on HTTP port: 8100
+Serving "." on all network interfaces (0.0.0.0) on HTTP port: 8080
 
 Local network interfaces and their IP address so you can pass one to your colleagues:
 
@@ -120,10 +120,10 @@ docker0              | 172.17.0.1      | fe80::42:c6cf:fe3d:a554
 veth0d522f4          |                 | fe80::307a:7fcf:fe3d:cba4
 
 You probably want to share:
-http://192.168.178.123:8100
+http://192.168.178.123:8080
 ```
 
-When opening the URL `http://192.168.178.123:8100` in a browser you see the directory you're serving. For example:
+When opening the URL `http://192.168.178.123:8080` in a browser you see the directory you're serving. For example:
 
 ![screenshot](assets/example-2-browser.png)
 

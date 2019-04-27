@@ -29,7 +29,7 @@ COPY --from=builder /go/src/app/app serve
 COPY --from=builder /var/empty /share
 
 VOLUME ["/share"]
-EXPOSE 8100
+EXPOSE 8080 8433
 
 ENTRYPOINT ["./serve"]
 CMD ["-d", "/share"]

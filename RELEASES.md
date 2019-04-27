@@ -12,6 +12,10 @@ vNext
 - Added: Optional basic authentication ([issue #10](https://github.com/philippgille/serve/issues/10))
 - Improved: Made `-h` a valid flag for printing the usage, leading to exit code 0 instead of 2
 
+### Breaking changes:
+
+- Changed default port from 8100 to 8080, which is an official alternative to port 80 for HTTP
+
 v0.2.1 (2018-05-13)
 -------------------
 

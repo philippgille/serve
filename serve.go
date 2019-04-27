@@ -35,9 +35,9 @@ const version = "v0.2.1"
 // Flags in alphabetical order, just like "-h" prints them
 var (
 	auth         = flag.String("a", "", `Require basic authentication with the given credentials (e.g. -a "alice:secret")`)
-	directory    = flag.String("d", ".", "The directory of static file to host")
+	directory    = flag.String("d", ".", "The directory of static files to host")
 	help         = flag.Bool("h", false, "Print the usage")
-	port         = flag.String("p", "8100", "Port to serve on")
+	port         = flag.String("p", "8080", "Port to serve on. 8080 by default for HTTP, 8443 for HTTPS (when using the -s flag)")
 	https        = flag.Bool("s", false, "Serve via HTTPS instead of HTTP. Creates a temporary self-signed certificate for localhost, 127.0.0.1, <hostname>.local, <hostname>.lan, <hostname>.home and the determined LAN IP address")
 	test         = flag.Bool("t", false, "Test / dry run (just prints the interface table)")
 	printVersion = flag.Bool("v", false, "Print the version")
@@ -58,9 +58,19 @@ func main() {
 		os.Exit(0)
 	}
 
+	scheme := "http"
+	if *https {
+		scheme += "s"
+		// If the port wasn't specifically set by the user,
+		// change it from its default value 8080 to 8443 as mentioned in the flag description.
+		if !isFlagPassed("p") {
+			*port = "8443"
+		}
+	}
+
 	// If the "-t" flag was used, only print the network interface table and exit
 	if *test {
-		printAddrs(*port, *https)
+		printAddrs(scheme, *port)
 		os.Exit(0)
 	}
 
@@ -83,14 +93,10 @@ func main() {
 	// Register handler for "/" in Go's DefaultServeMux
 	http.Handle("/", finalHandler)
 
-	scheme := "HTTP"
-	if *https {
-		scheme += "S"
-	}
-	fmt.Printf("\nServing \"%s\" on all network interfaces (0.0.0.0) on %v port: %s\n", *directory, scheme, *port)
+	fmt.Printf("\nServing \"%s\" on all network interfaces (0.0.0.0) on %v port: %s\n", *directory, strings.ToUpper(scheme), *port)
 
 	// Print local network interfaces and their IP addresses
-	printAddrs(*port, *https)
+	printAddrs(scheme, *port)
 
 	if *https {
 		cert, sans, err := generateCert()
@@ -120,7 +126,7 @@ func main() {
 }
 
 // printAddrs prints the local network interfaces and their IP addresses
-func printAddrs(port string, https bool) {
+func printAddrs(scheme, port string) {
 	fmt.Println("\nLocal network interfaces and their IP addresses so you can pass one to your colleagues:")
 	ifaces, err := net.Interfaces()
 	if err != nil {
@@ -149,10 +155,6 @@ func printAddrs(port string, https bool) {
 
 	// Show probable favorite
 	if fav != "" {
-		scheme := "http"
-		if https {
-			scheme += "s"
-		}
 		fmt.Printf("\nYou probably want to share:\n%v://%v:%v\n", scheme, fav, port)
 	}
 }
@@ -235,4 +237,15 @@ func withBasicAuth(next http.Handler) http.Handler {
 		}
 		next.ServeHTTP(w, r)
 	})
+}
+
+// isFlagPassed returns true if the flag was explicitly set as CLI parameter
+func isFlagPassed(name string) bool {
+	found := false
+	flag.Visit(func(f *flag.Flag) {
+		if f.Name == name {
+			found = true
+		}
+	})
+	return found
 }
