@@ -5,14 +5,18 @@ Based on the Gist https://gist.github.com/paulmach/7271283/2a1116ca15e34ee23ac5a
 by Paul Mach (https://github.com/paulmach)
 
 Usage:
+  -a string
+        Require basic authentication with the given credentials (e.g. -a "alice:secret")
   -d string
-        The directory of static file to host (default ".")
+        The directory of static files to host (default ".")
+  -h    Print the usage
   -p string
-        Port to serve on (default "8100")
+        Port to serve on. 8080 by default for HTTP, 8443 for HTTPS (when using the -s flag) (default "8080")
+  -s    Serve via HTTPS instead of HTTP. Creates a temporary self-signed certificate for localhost, 127.0.0.1, <hostname>.local, <hostname>.lan, <hostname>.home and the determined LAN IP address
   -t    Test / dry run (just prints the interface table)
   -v    Print the version
 
-Navigating to http://localhost:8100 will display the index.html or directory listing file.
+Navigating to http://localhost:8080 will display the index.html or directory listing file.
 */
 package main
 
@@ -24,7 +28,6 @@ import (
 	"net"
 	"net/http"
 	"os"
-	"runtime"
 	"strings"
 )
 
@@ -157,95 +160,4 @@ func printAddrs(scheme, port string) {
 	if fav != "" {
 		fmt.Printf("\nYou probably want to share:\n%v://%v:%v\n", scheme, fav, port)
 	}
-}
-
-// cutString cuts strings that exceed the maxLen to (maxLen-2) and adds ".."
-func cutString(s string, maxLen int) string {
-	if len(s) > maxLen {
-		return s[:maxLen-2] + ".."
-	}
-	return s
-}
-
-// getAddressesFromIface goes through the addresses of the given interface and tries to return the first of each kind.
-//
-// The interesting interfaces like eth0 and wlan0 typically have 2 addresses: one IPv4 and one IPv6 address.
-// But some interfaces just have one of them, or if an interface is deactivated it doesn't have any.
-// On Windows the main network interface like "Ethernet 3" can have many addresses and the main IPv4 address doesn't have to be one of the first 2.
-// We must take care of all these combinations.
-func getAddressesFromIface(iface net.Interface) (ipv4 string, ipv6 string) {
-	addrs, err := iface.Addrs()
-	if err != nil {
-		log.Fatal(err)
-	}
-	for i := 0; i < len(addrs) && (ipv4 == "" || ipv6 == ""); i++ {
-		// In the case of two addresses they could potentially be of the same type.
-		// We want to show the first address. overwriteIfEmpty() doesn't overwrite existing values.
-		addrWithoutMask := strings.Split(addrs[i].String(), "/")[0]
-		if strings.Contains(addrWithoutMask, ":") {
-			overwriteIfEmpty(&ipv4, "")
-			overwriteIfEmpty(&ipv6, addrWithoutMask)
-		} else {
-			overwriteIfEmpty(&ipv4, addrWithoutMask)
-			overwriteIfEmpty(&ipv6, "")
-		}
-	}
-	return
-}
-
-// overwriteIfEmpty only overwrites the string s with the string overwrite if s is empty
-func overwriteIfEmpty(s *string, overwrite string) {
-	if *s == "" {
-		*s = overwrite
-	}
-}
-
-// isFav checks the network interface's name and if it's a typical main one (like "eth0" on Linux) it returns true.
-//
-// Note: All possible runtime.GOOS values are listed here: https://golang.org/doc/install/source#environment
-func isFav(iface net.Interface) bool {
-	switch runtime.GOOS {
-	case "windows":
-		if iface.Name == "WiFi" ||
-			len(iface.Name) >= 8 && iface.Name[:8] == "Ethernet" {
-			return true
-		}
-	case "darwin":
-		if iface.Name == "en0" || iface.Name == "en1" {
-			return true
-		}
-	case "linux":
-		if iface.Name == "eth0" || iface.Name == "wlan0" {
-			return true
-		}
-	}
-	return false
-}
-
-// withBasicAuth adds a basic authentication middleware before the passed handler.
-func withBasicAuth(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		username, password, ok := r.BasicAuth()
-		if !ok {
-			w.Header().Set("WWW-Authenticate", "Basic")
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		if username+":"+password != *auth {
-			w.WriteHeader(http.StatusForbidden)
-			return
-		}
-		next.ServeHTTP(w, r)
-	})
-}
-
-// isFlagPassed returns true if the flag was explicitly set as CLI parameter
-func isFlagPassed(name string) bool {
-	found := false
-	flag.Visit(func(f *flag.Flag) {
-		if f.Name == name {
-			found = true
-		}
-	})
-	return found
 }

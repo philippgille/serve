@@ -11,7 +11,6 @@ import (
 	"math"
 	"math/big"
 	"net"
-	"os"
 	"strings"
 	"time"
 )
@@ -83,38 +82,4 @@ func generateCert() (tls.Certificate, []string, error) {
 		PrivateKey:  privKey,
 		Leaf:        &cert,
 	}, sans, nil
-}
-
-// defaultSANs returns DNS names and IP addresses that might be used to reach the current host,
-// either from the host itself or from other machines in the local network.
-func defaultSANs() []string {
-	result := []string{"localhost", "127.0.0.1"}
-
-	hostname, err := os.Hostname()
-	if err == nil {
-		result = append(result, hostname, hostname+".local", "*."+hostname+".local", hostname+".lan", "*."+hostname+".lan", hostname+".home", "*."+hostname+".home")
-	}
-
-	lanIP, err := lanIP()
-	if err == nil {
-		result = append(result, lanIP)
-	}
-
-	return result
-}
-
-// lanIP tries to determine the IP address of the current machine in the LAN.
-func lanIP() (string, error) {
-	ifaces, err := net.Interfaces()
-	if err != nil {
-		return "", err
-	}
-	fav := ""
-	for _, iface := range ifaces {
-		if isFav(iface) {
-			fav, _ = getAddressesFromIface(iface)
-			break
-		}
-	}
-	return fav, nil
 }
