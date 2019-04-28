@@ -147,9 +147,11 @@ There are also build scripts for Windows and Linux for creating release artifact
 
 To build with a Docker container:
 
-`docker run --rm -v ${PWD}:/go/src/github.com/philippgille/serve -w /go/src/github.com/philippgille/serve golang build/build.sh noupx`  
+`docker run --rm -v $(pwd):/go/src/github.com/philippgille/serve -w /go/src/github.com/philippgille/serve golang build/build.sh noupx`  
 Or with UPX:  
-`docker run --rm -v ${PWD}:/go/src/github.com/philippgille/serve -w /go/src/github.com/philippgille/serve golang bash -c "apt update && apt install -y upx-ucl && build/build.sh"`
+`docker run --rm -v $(pwd):/go/src/github.com/philippgille/serve -w /go/src/github.com/philippgille/serve golang bash -c "apt update && apt install -y upx-ucl && build/build.sh"`
+
+> Note: You have to use `${pwd}` instead of `$(pwd)` on Windows.
 
 ### Packages
 
