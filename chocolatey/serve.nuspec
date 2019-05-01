@@ -37,7 +37,7 @@
     <!-- Software Source Location - is the software FOSS somewhere? Link to it with this -->
     <projectSourceUrl>https://github.com/philippgille/serve</projectSourceUrl>
     <!-- At what url are the software docs located? -->
-    <docsUrl>https://github.com/philippgille/serve/blob/master/chocolatey/README.md</docsUrl>
+    <docsUrl>https://github.com/philippgille/serve/blob/master/README.md</docsUrl>
     <!--<mailingListUrl></mailingListUrl>-->
     <bugTrackerUrl>https://github.com/philippgille/serve/issues</bugTrackerUrl>
     <!-- Where is this Chocolatey package located (think GitHub)? packageSourceUrl is highly recommended for the community feed -->

@@ -12,6 +12,7 @@ vNext
 - Added: Optional basic authentication ([issue #10](https://github.com/philippgille/serve/issues/10))
 - Improved: Updated building the snap with snapcraft 3.x instead of its 2.4x legacy mode
 - Fixed: `serve-h` lead to exit code 2 instead of 0
+- Fixed: Wrong documentation URL in the Chocolatey Nuspec file ([issue #18](https://github.com/philippgille/serve/issues/18))
 
 ### Breaking changes:
 
