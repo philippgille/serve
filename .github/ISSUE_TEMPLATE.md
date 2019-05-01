@@ -7,43 +7,44 @@ If this is a bug report, describe the expected behavior, the actual behavior and
 Feature request
 ---------------
 
-Example issue title: *Automatically add AppImage to GitHub Releases*
+Example issue title: *Add automatic redirect from HTTP to HTTPS*
 
 ### Feature description
 
 Example:
-> Currently only the FDD and SCD are deployed to GitHub Releases, but the AppImage should be deployed as well.
+> Currently browsing to a `serve` server via HTTP when the server runs via HTTPS leads to an error. An automatic redirect would be nice though.
 
 ### Info
 
 Example:
-> For info about how to do that in Travis CI see this documentation: [Travis CI docs - GitHub Releases Uploading](https://docs.travis-ci.com/user/deployment/releases/)
+> For info about how to do that in Go see this StackOverflow answer: [https://stackoverflow.com/questions/37536006/how-do-i-rewrite-redirect-from-http-to-https-in-go](https://stackoverflow.com/questions/37536006/how-do-i-rewrite-redirect-from-http-to-https-in-go)
 
 Bug
 ---
 
-Example issue title: *Installing Chocolatey package via OneGet doesn't lead to the app being available on the PATH*
+Example issue title: *Hidden files aren't served*
 
 ### Bug description
 
 Example:
-> When installing serve via OneGet from the MyGet feed the executable should be available on the PATH, but isn't.
+> Hidden files aren't served.
 
 
 ### Reproduction
 
 Example:
-> 1. Run `install-Package my-app.portable -Source https://www.myget.org/F/my-feed -provider chocolatey`
-> 2. Try to run `my-app`
->     - fails because it's not found on the PATH
+> 1. Run `touch .example-hidden`
+> 1. Run `snap install serve`
+> 2. Run `serve`
+> 3. => `http://localhost:8080` doesn't show the hidden file
 
 ### Info
 
 Example:
-> - Version: 0.1.0
-> - Operating system: Windows 10 Pro Fall Creators Update
+> - Version: 0.2.1
+> - Operating system: Ubuntu 16.04
 
 ### Possible solution
 
 Example:
-> Probably blocked by https://github.com/chocolatey/chocolatey-oneget/issues/2.
+> Add additional optional permissions to the snap.
