@@ -1,33 +1,52 @@
 name: serve
 version: "0.2.1"
-summary: serve starts a simple temporary static file server in your current directory # 79 char long summary
+# The summary must not exceed 78 characters.
+summary: serve starts a simple temporary static file server in your current directory
 description: |
-    serve starts a simple temporary static file server in your current directory
-    and prints your IP address to share with colleagues.
+  serve starts a simple temporary static file server in your current directory
+  and prints your IP address to share with colleagues.
 
-    Run `serve -h` to print its usage.
+  Run `serve -h` to print its usage.
 
-    Press Ctrl+C in the terminal to stop the server.
+  Press Ctrl+C in the terminal to stop the server.
 
-grade: stable # devel or stable. strict for releasing to the candidate/stable channel
-confinement: strict # devmode or strict. strict once you have the right plugs and slots
+# Title and license are "new" and not supported in older versions of snapcraft.
+title: Temporary static file server
+license: MPL-2.0
+
+type: app # "app" is the default, but set it explicitly anyway
+
+grade: stable # devel or stable. devel can't be published to the candidate or stable channels.
+confinement: strict # devmode or strict. devmode snaps can't be published to the stable channel. strict leads to no access outside of declared interfaces through plugs.
+
+# "Without specifying the base property in the snapcraft.yaml Snapcraft will operate in legacy mode,
+# which is essentially a 2.4X old version of Snapcraft and will lose the functionalities and bug fixes introduced in the new version".
+#
+# Maybe "bare" might be a better fit in the future, but it's currently not supported in snapcraft/snapd.
+# "Bare" might also require serve to be compiled with CGO_ENABLED=0 and/or "netgo" + "osusergo" compile flags and/or `-extldflags "-static"` and/or more.
+base: core18
+
+# There currently seem to be several issues with cross compiling a snap with the go plugin.
+# Without this, and without "--target-arch=...", the snap will be built for the same arch the build is running on.
+# In the future we should check for updates of snapcraft and revisit this option.
+#architectures: ...
 
 parts:
-  # Go isn't needed as a library, but the default Go version for building the snap is 1.6
-  # and only with specifying Go as part we can set a newer version.
-  # It does NOT get added as library in the final snap.
-  # Note: This significantly increases the build duration!
-  go:
-    source-depth: 1
-    source-tag: go1.10.1
   serve:
-    after: [go]
+    # Go plugin source code: https://github.com/snapcore/snapcraft/blob/master/snapcraft/plugins/go.py
     plugin: go
-    go-importpath: github.com/philippgille/serve
+    # Set go-channel to an empty string so that the Go plugin doesn't use the unofficial Go snap for building.
+    # We want to use the OS's package manager's Go package.
+    # When using a recent version of snapcraft, building a snap is done in a VM which is currently Ubuntu 18.04,
+    # so even when using an older Ubuntu 16 as host, at least Go 1.10 is used.
+    go-channel: ""
     # Using the repository instead of "." makes it possible to use this file standalone
-    # and also leads to reproducable builds thanks to the tag.
-    source: https://github.com/philippgille/serve.git
-    source-depth: 1
+    # and also leads to reproducable builds thanks to the tag (in case it's used instead of a source-depth of 1).
+    source: https://github.com/philippgille/serve
+    source-type: git
+    # Either use a source-depth of 1 for the latest commit, OR a source-tag
+    #source-depth: 1
+    #source-branch: master
     source-tag: v0.2.1
 
 apps:
@@ -35,4 +54,4 @@ apps:
     command: serve
     plugs:
       - network-bind # For acting as HTTP server
-      - home # For access to the user's $HOME directory, needed to serve its files
+      - home # For access to the user's $HOME directory, needed to serve its files. No access to hidden files though.

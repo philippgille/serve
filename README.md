@@ -166,10 +166,13 @@ For Snap a Git hook is set up in the Snapcraft dashboard to automatically build 
 
 - Snap: [https://github.com/philippgille/serve/blob/master/snap/snapcraft.yaml](https://github.com/philippgille/serve/blob/master/snap/snapcraft.yaml)
 
-The Snap package can also be built manually, for example with this script which utilizes Docker:
+The Snap package can also be built manually. In the past this could even be done within a Docker container, but the [official Snapcraft Docker image](https://hub.docker.com/u/snapcoret/snapcraft) (according to the [docs](https://docs.snapcraft.io/build-on-docker/4158)) is outdated (as of 2019-05-01) and doesn't contain the latest version of `snapcraft` (and installing the latest version via `snap` itself, as you'd do nowadays according to the official docs, doesn't work).  
+So now you can only build the Snap package on Linux, using the following steps:
 
-- Windows: `build\build-snap-with-docker.ps1`
-- Linux: `build/build-snap-with-docker.sh`
+1. `snap install snapcraft --classic`
+2. `snapcraft`
+
+Depending on the current `serve` version and your CPU's architecture it will create a file like `serve_0.2.1_amd64.snap`, which can manually be installed with `snap install --dangerous serve_0.2.1_amd64.snap`.
 
 The Chocolatey packages need to be uploaded manually to Chocolatey [here](https://chocolatey.org/packages/upload). The package can be built with this script:
 
