@@ -10,6 +10,7 @@ vNext
 
 - Added: Optional generation and use of a self signed certificate to serve files via HTTPS instead of HTTP ([issue #9](https://github.com/philippgille/serve/issues/9))
 - Added: Optional basic authentication ([issue #10](https://github.com/philippgille/serve/issues/10))
+- Improved: Updated building the snap with snapcraft 3.x instead of its 2.4x legacy mode
 - Fixed: `serve-h` lead to exit code 2 instead of 0
 
 ### Breaking changes:
