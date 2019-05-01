@@ -61,6 +61,39 @@ func main() {
 		os.Exit(0)
 	}
 
+	// If the "-v" flag was used, only print the version and exit
+	if *printVersion {
+		fmt.Printf("serve version: %v\n", version)
+		os.Exit(0)
+	}
+
+	// Precondition checks.
+	// Should be done for most string flags.
+
+	// Auth
+	if *auth != "" && !strings.Contains(*auth, ":") {
+		log.Fatal(`When using the -a flag to add basic authentication, you must specify credentials in the form of "username:password". For example: "alice:secret".`)
+	}
+	// Directory
+	// Use Stat instead of Lstat because serving works with softlinks (e.g. "serve -d ./softlink")
+	// Note: All of the following checks aren't really necessary, but user-friendly.
+	// Not necessary because the dir must only exist and be a dir and be readable on each request.
+	// So theoretically the server could already be started and the directory created/modified later.
+	fileInfo, err := os.Stat(*directory)
+	if err != nil {
+		log.Fatalf("%v can't be served: %v\n", *directory, err)
+	} else if !fileInfo.IsDir() {
+		log.Fatalf("%v can't be served because it's a file and not a directory: %v\n", *directory, err)
+	} else {
+		file, err := os.Open(*directory)
+		if err != nil {
+			log.Fatalf("%v can't be served because it's not readable: %v\n", *directory, err)
+		} else {
+			file.Close() // Ignore errors
+		}
+	}
+	// Port: Will be detected by a lookup when calling ListenAndServe() at the end
+
 	scheme := "http"
 	if *https {
 		scheme += "s"
@@ -77,19 +110,10 @@ func main() {
 		os.Exit(0)
 	}
 
-	// If the "-v" flag was used, only print the version and exit
-	if *printVersion {
-		fmt.Printf("serve version: %v\n", version)
-		os.Exit(0)
-	}
-
 	finalHandler := http.FileServer(http.Dir(*directory))
 
 	// If the "-a" flag was used, use basic authentication middleware
 	if *auth != "" {
-		if !strings.Contains(*auth, ":") {
-			log.Fatal(`When using the -a flag to add basic authentication, you must specify credentials in the form of "username:password". For example: "alice:secret".`)
-		}
 		finalHandler = withBasicAuth(finalHandler)
 	}
 
