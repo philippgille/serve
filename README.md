@@ -82,6 +82,8 @@ $ serve -h
 Usage of serve:
   -a string
         Require basic authentication with the given credentials (e.g. -a "alice:secret")
+  -b string
+        Bind to (listen on) a specific interface. "0.0.0.0" is for ALL interfaces. "localhost" disables access from other devices. (default "0.0.0.0")
   -d string
         The directory of static files to host (default ".")
   -h    Print the usage

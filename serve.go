@@ -7,6 +7,8 @@ by Paul Mach (https://github.com/paulmach)
 Usage:
   -a string
         Require basic authentication with the given credentials (e.g. -a "alice:secret")
+  -b string
+        Bind to (listen on) a specific interface. "0.0.0.0" is for ALL interfaces. "localhost" disables access from other devices. (default "0.0.0.0")
   -d string
         The directory of static files to host (default ".")
   -h    Print the usage
@@ -38,6 +40,7 @@ const version = "v0.2.1"
 // Flags in alphabetical order, just like "-h" prints them
 var (
 	auth         = flag.String("a", "", `Require basic authentication with the given credentials (e.g. -a "alice:secret")`)
+	bind         = flag.String("b", "0.0.0.0", `Bind to (listen on) a specific interface. "0.0.0.0" is for ALL interfaces. "localhost" disables access from other devices.`)
 	directory    = flag.String("d", ".", "The directory of static files to host")
 	help         = flag.Bool("h", false, "Print the usage")
 	port         = flag.String("p", "8080", "Port to serve on. 8080 by default for HTTP, 8443 for HTTPS (when using the -s flag)")
@@ -74,6 +77,7 @@ func main() {
 	if *auth != "" && !strings.Contains(*auth, ":") {
 		log.Fatal(`When using the -a flag to add basic authentication, you must specify credentials in the form of "username:password". For example: "alice:secret".`)
 	}
+	// Bind: Will be detected by a lookup when calling ListenAndServe() at the end
 	// Directory
 	// Use Stat instead of Lstat because serving works with softlinks (e.g. "serve -d ./softlink")
 	// Note: All of the following checks aren't really necessary, but user-friendly.
@@ -106,7 +110,11 @@ func main() {
 
 	// If the "-t" flag was used, only print the network interface table and exit
 	if *test {
-		printAddrs(scheme, *port)
+		if *bind != "0.0.0.0" {
+			fmt.Printf("\nNo need to print the network interface table, because serve will bind to %v as requested, making it reachable via:\n%v://%v:%v\n", *bind, scheme, *bind, *port)
+		} else {
+			printAddrs(scheme, *port)
+		}
 		os.Exit(0)
 	}
 
@@ -120,10 +128,13 @@ func main() {
 	// Register handler for "/" in Go's DefaultServeMux
 	http.Handle("/", finalHandler)
 
-	fmt.Printf("\nServing \"%s\" on all network interfaces (0.0.0.0) on %v port: %s\n", *directory, strings.ToUpper(scheme), *port)
-
-	// Print local network interfaces and their IP addresses
-	printAddrs(scheme, *port)
+	if *bind == "0.0.0.0" {
+		fmt.Printf("\nServing \"%s\" on all network interfaces (0.0.0.0) on %v port: %s\n", *directory, strings.ToUpper(scheme), *port)
+		// Print local network interfaces and their IP addresses
+		printAddrs(scheme, *port)
+	} else {
+		fmt.Printf("\nServing \"%s\" on:\n%v://%v:%s\n", *directory, scheme, *bind, *port)
+	}
 
 	if *https {
 		cert, sans, err := generateCert()
@@ -136,7 +147,7 @@ func main() {
 			Certificates:             []tls.Certificate{cert},
 		}
 		server := &http.Server{
-			Addr:      ":" + *port,
+			Addr:      *bind + ":" + *port,
 			TLSConfig: tlsConfig,
 		}
 		fmt.Printf("\nTemporary self signed certificate valid for %v days for the following hostnames: %v\n", certValidityDurationDays, sans)
@@ -148,7 +159,7 @@ func main() {
 		log.Fatal(server.ListenAndServeTLS("", ""))
 	} else {
 
-		log.Fatal(http.ListenAndServe(":"+*port, nil))
+		log.Fatal(http.ListenAndServe(*bind+":"+*port, nil))
 	}
 }
 
