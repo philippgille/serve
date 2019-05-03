@@ -23,6 +23,7 @@ Navigating to http://localhost:8080 will display the index.html or directory lis
 package main
 
 import (
+	"crypto/sha1"
 	"crypto/tls"
 	"flag"
 	"fmt"
@@ -150,15 +151,12 @@ func main() {
 			Addr:      *bind + ":" + *port,
 			TLSConfig: tlsConfig,
 		}
-		fmt.Printf("\nTemporary self signed certificate valid for %v days for the following hostnames: %v\n", certValidityDurationDays, sans)
-		// TODO: Print the certificate fingerprint so the server can send it to the client via a secure channel
-		// and the client can then validate it to make sure it's not a different certificate created by a malicious actor (MitM).
-		// But first do some research regarding if the fingerprint is sufficient for that.
-		// Also the fingerprint should probably be a different one with each certificate generation,
-		// which didn't seem to be the case during my trials, but maybe I generated the fingerprint in the wrong way.
+		fmt.Printf("\nTemporary self signed certificate valid for %v days for the following hostnames:\n%v\n", certValidityDurationDays, sans)
+		derBytes := cert.Certificate[0]
+		fmt.Printf("\nCertificate fingerprint for checking if the certificate presented by the client's browser is the correct one and not by some MitM attacker:\n%x\n", sha1.Sum(derBytes))
+
 		log.Fatal(server.ListenAndServeTLS("", ""))
 	} else {
-
 		log.Fatal(http.ListenAndServe(*bind+":"+*port, nil))
 	}
 }
