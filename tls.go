@@ -46,7 +46,8 @@ func generateCert() (tls.Certificate, []string, error) {
 		NotAfter:     notAfter,
 		KeyUsage:     x509.KeyUsageKeyEncipherment | x509.KeyUsageDigitalSignature,
 		ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
-		// DNSNames:     []string{""}, // See comment below regarding SAN entries
+		// The certificate is used directly and not as CA to sign other certificates,
+		// so we don't need `IsCA: true` or `KeyUsage |= x509.KeyUsageCertSign`.
 	}
 
 	// SAN = Subject Alternative Name / "subjectAltName".
