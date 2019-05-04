@@ -5,11 +5,13 @@ serve
 
 `serve` starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues.
 
-It's based on [a Gist](https://gist.github.com/paulmach/7271283/2a1116ca15e34ee23ac5a3a87e2a626451424993) by [Paul Mach](https://github.com/paulmach).
+It was based on [a Gist](https://gist.github.com/paulmach/7271283/2a1116ca15e34ee23ac5a3a87e2a626451424993) by [Paul Mach](https://github.com/paulmach), but has evolved a lot.
 
 Contents
 --------
 
+- [Features](#features)
+  - [Roadmap](#roadmap)
 - [Install](#install)
     - [Windows](#windows)
     - [macOS](#macos)
@@ -20,11 +22,37 @@ Contents
     - [Example](#example)
 - [Build](#build)
     - [Packages](#packages)
+- [Related projects](#related-projects)
+
+Features
+--------
+
+- [X] Serves static files in any given accessible directory until you hit `Ctrl-C`
+- [X] Prints a table of your network interfaces and their IP addresses and guesses which one you most likely want to share
+- [X] Follows softlinks transparently
+- [X] Optional basic authentication
+- [X] Optionally serve files via HTTPS instead of HTTP, using a temporary self signed certificate that's automatically generated for you on the fly
+- [X] Optionally bind to a specific network interface, for example `localhost` to disable access from other devices
+- [X] Only uses the Go standard library and no external dependencies
+- [X] Single file executable, usable without any installation, or easy automatic updates when using a package manager
+
+### Roadmap
+
+- Find out and print external IP address that's reachable from the Internet
+- Optionally compress files when requested
+- Optionally make your server reachable from the Internet even if it's behind a router with NAT
+  - Via reverse SSH tunnel
+  - Via 3rd party service like [ngrok](https://ngrok.com/), [https://localtunnel.me](https://localtunnel.me), [LabStack Tunnel](https://labstack.com/docs/tunnel) etc.
+  - Via [frp](https://github.com/fatedier/frp)
+- Optionally run a [Tor](https://www.torproject.org/) hidden service (v3) for:
+  - Automatic accessibility from the Internet (via Tor Browser or proxy) even when behind a router with NAT
+  - Encrypted traffic
+  - No exposure of your IP address
 
 Install
 -------
 
-We recommend installing `serve` with one of the following package managers, because they provide you with functionality such as automatic updates, instant availability as command in the `PATH`, easy removal, sandboxing etc.  
+We recommend installing `serve` with one of the following package managers, because they provide you with functionality such as automatic updates, instant availability as command in the `PATH`, easy removal, sandboxing (depending on the package manager) etc.  
 But alternatively you can always install `serve` manually as well, see [Manually](#manually).
 
 ### Windows
@@ -49,17 +77,17 @@ Or in a single command:
 ### Linux
 
 The easiest way is to use the package manager [Snap](https://snapcraft.io/), which is installed by default on Ubuntu 16.04 and later:  
-`sudo snap install serve`
+`snap install serve`
 
 You can also have a look at the description in the Snap Store on [https://snapcraft.io/serve](https://snapcraft.io/serve).
 
-> Note: Due to restrictions by Snap, `serve` can only serve files in the user's `$HOME` directory.
+> Note: Due to sandboxing by Snap, `serve` can only serve files in the user's `$HOME` directory.
 
 ### Manually
 
 #### With Go installed
 
-`go get github.com/philippgille/serve`
+`go get -u github.com/philippgille/serve`
 
 > Note: Requires your `$GOPATH/bin` directory to be in your `PATH`, which is usually the case.
 
@@ -183,3 +211,21 @@ The Chocolatey packages need to be uploaded manually to Chocolatey [here](https:
 The Docker image can be built like this:
 
 `docker build -f docker/Dockerfile -t philippgille/serve .`
+
+Related projects
+----------------
+
+- `python -m SimpleHTTPServer 8080`
+  - Con: Requires Python, no option to require authentication, no HTTPS
+- [https://github.com/indexzero/http-server](https://github.com/indexzero/http-server)
+  - Pro: Popular (8200 GitHub stars as of 2019-05-02), mature, feature-rich
+  - Con: Requires Node.js
+- [https://github.com/zeit/serve](https://github.com/zeit/serve)
+  - Pro: Popular (4200 GitHub stars as of 2019-05-02), mature
+  - Con: Requires Node.js, no option to require authentication, no HTTPS, can't serve directories other than the current working directory
+- [https://github.com/codeskyblue/gohttpserver](https://github.com/codeskyblue/gohttpserver)
+  - Pro: Nice web UI, shows QR codes for downloading files from a smartphone, OpenID and OAuth2 authentication, optional upload of files from a client, `README.md` preview, directory zip download any many more features
+  - Con: Too many features ("[feature creep](https://en.wikipedia.org/wiki/Feature_creep)")? Many dependencies.
+- [https://github.com/syntaqx/serve](https://github.com/syntaqx/serve)
+  - Con: No option to require authentication, no installation packages for Windows or Linux
+- Many others!
