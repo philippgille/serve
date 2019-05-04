@@ -71,6 +71,15 @@ func main() {
 		os.Exit(0)
 	}
 
+	// If the "-d" flag wasn't used, but a POSITIONAL argument is passed,
+	// this likely means the user wants to serve that directory,
+	// because many other CLIs expect the main subject as first positional argument.
+	// Examples: `go build -v .`; `docker run -it busybox`; `git add -v *.go`
+	if !isFlagPassed("d") && flag.Arg(0) != "" && isDirAccessible(flag.Arg(0), false) {
+		fmt.Printf("\nWARNING: You didn't use the \"-d\" flag, but a positional argument instead. It seems to be a valid directory though, so serve is going to serve it.\n")
+		*directory = flag.Arg(0)
+	}
+
 	// Precondition checks.
 	// Should be done for most string flags.
 
@@ -80,23 +89,10 @@ func main() {
 	}
 	// Bind: Will be detected by a lookup when calling ListenAndServe() at the end
 	// Directory
-	// Use Stat instead of Lstat because serving works with softlinks (e.g. "serve -d ./softlink")
-	// Note: All of the following checks aren't really necessary, but user-friendly.
+	// Note: All checks in the following call aren't necessary, but user-friendly.
 	// Not necessary because the dir must only exist and be a dir and be readable on each request.
 	// So theoretically the server could already be started and the directory created/modified later.
-	fileInfo, err := os.Stat(*directory)
-	if err != nil {
-		log.Fatalf("%v can't be served: %v\n", *directory, err)
-	} else if !fileInfo.IsDir() {
-		log.Fatalf("%v can't be served because it's a file and not a directory: %v\n", *directory, err)
-	} else {
-		file, err := os.Open(*directory)
-		if err != nil {
-			log.Fatalf("%v can't be served because it's not readable: %v\n", *directory, err)
-		} else {
-			file.Close() // Ignore errors
-		}
-	}
+	isDirAccessible(*directory, true)
 	// Port: Will be detected by a lookup when calling ListenAndServe() at the end
 
 	scheme := "http"

@@ -12,6 +12,7 @@ vNext
 - Added: Optional basic authentication ([issue #10](https://github.com/philippgille/serve/issues/10))
 - Added: Option to bind to a specific network interface ([issue #19](https://github.com/philippgille/serve/issues/19))
 - Added: Exit with an error when using the `-d` flag and the argument is not a directory, the directory doesn't exist or the directory is not readable
+- Added: Handling of the directory as positional argument. We keep this undocumented for now to not promote its use, but it was a common source of problems (where a directory was passed as positional argument and then "." was served), which are now mitigated.
 - Improved: Updated building the snap with snapcraft 3.x instead of its 2.4x legacy mode
 - Fixed: `serve-h` lead to exit code 2 instead of 0
 - Fixed: Wrong documentation URL in the Chocolatey Nuspec file ([issue #18](https://github.com/philippgille/serve/issues/18))
