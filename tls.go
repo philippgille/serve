@@ -48,6 +48,8 @@ func generateCert() (tls.Certificate, []string, error) {
 		ExtKeyUsage:  []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
 		// The certificate is used directly and not as CA to sign other certificates,
 		// so we don't need `IsCA: true` or `KeyUsage |= x509.KeyUsageCertSign`.
+		// We also don't need `BasicConstraintsValid: true`,
+		// because this certificate doesn't need any validation, because it's created here.
 	}
 
 	// SAN = Subject Alternative Name / "subjectAltName".

@@ -1,8 +1,8 @@
 /*
 Serve starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues.
 
-Based on the Gist https://gist.github.com/paulmach/7271283/2a1116ca15e34ee23ac5a3a87e2a626451424993
-by Paul Mach (https://github.com/paulmach)
+Initially based on the Gist https://gist.github.com/paulmach/7271283/2a1116ca15e34ee23ac5a3a87e2a626451424993
+by Paul Mach (https://github.com/paulmach).
 
 Usage:
   -a string
