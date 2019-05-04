@@ -1,5 +1,5 @@
 name: serve
-version: "0.2.1"
+version: "0.3.0"
 # The summary must not exceed 78 characters.
 summary: serve starts a simple temporary static file server in your current directory
 description: |
@@ -47,7 +47,7 @@ parts:
     # Either use a source-depth of 1 for the latest commit, OR a source-tag
     source-depth: 1
     source-branch: master
-    #source-tag: v0.2.1
+    #source-tag: v0.3.0
 
 apps:
   serve:

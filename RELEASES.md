@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+v0.3.0 (2019-05-04)
+-------------------
+
 - Added: Optional generation and use of a self signed certificate to serve files via HTTPS instead of HTTP ([issue #9](https://github.com/philippgille/serve/issues/9))
 - Added: Optional basic authentication ([issue #10](https://github.com/philippgille/serve/issues/10))
 - Added: Option to bind to a specific network interface ([issue #19](https://github.com/philippgille/serve/issues/19))
