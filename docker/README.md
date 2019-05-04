@@ -7,6 +7,8 @@ Supported tags and respective `Dockerfile` links
 ------------------------------------------------
 
 - [`latest` (docker/Dockerfile)](https://github.com/philippgille/serve/blob/master/docker/Dockerfile)
+- [`0.3.0` (docker/Dockerfile)](https://github.com/philippgille/serve/blob/v0.3.0/docker/Dockerfile)
+- [`0.2.1` (docker/Dockerfile)](https://github.com/philippgille/serve/blob/0eb0a5ba92c2a131e56e347275b41bc3fbc7cea9/docker/Dockerfile)
 
 Usage
 -----
