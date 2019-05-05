@@ -228,4 +228,6 @@ Related projects
   - Con: Too many features ("[feature creep](https://en.wikipedia.org/wiki/Feature_creep)")? Many dependencies.
 - [https://github.com/syntaqx/serve](https://github.com/syntaqx/serve)
   - Con: No option to require authentication, no installation packages for Windows or Linux
+- [https://github.com/rhardih/serve](https://github.com/rhardih/serve)
+  - Con: No option to require authentication, no installation packages, no HTTPS when _not_ using HTTP/2, when using HTTP/2 the certificate and private key are written to disk in the current working directory, *which is served by default*, so an attacker can easily download and use them in a Man-in-the-Middle attack without the client noticing (because it's the correct certificate) (as of 2019-05-05 - I created [an issue](https://github.com/rhardih/serve/issues/3) for that and hope it gets fixed soon)
 - Many others!
