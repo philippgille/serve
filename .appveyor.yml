@@ -1,12 +1,10 @@
 version: "{build}"
 
-clone_folder: c:\gopath\src\github.com\philippgille\serve
-
 # GitHub specific alternative to `clone_depth: <number>`
 shallow_clone: true
 
 environment:
-  GOPATH: c:\gopath
+  GO111MODULE: on
 
 stack: go 1.12
 
