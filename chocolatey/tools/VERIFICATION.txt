@@ -4,4 +4,4 @@ in verifying that this package's contents are trustworthy.
  
 I'm the author of the software, but if further verification is necessary you can create a SHA256 checksum of the binary file in this package. It should match the ones in https://github.com/philippgille/serve/releases.
 
-For example, when this NuGet package is version 0.3.0, you can create a SHA256 checksum of serve.exe and check if it matches https://github.com/philippgille/serve/releases/download/v0.3.0/serve_v0.3.0_Windows_x64.exe.sha256.
+For example, when this NuGet package is version 0.3.1, you can create a SHA256 checksum of serve.exe and check if it matches https://github.com/philippgille/serve/releases/download/v0.3.1/serve_v0.3.1_Windows_x64.exe.sha256.

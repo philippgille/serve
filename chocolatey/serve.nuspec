@@ -9,7 +9,7 @@
     <!-- version should MATCH as closely as possible with the underlying software -->
     <!-- Is the version a prerelease of a version? https://docs.nuget.org/create/versioning#creating-prerelease-packages -->
     <!-- Note that unstable versions like 0.0.1 can be considered a released version, but it's possible that one can release a 0.0.1-beta before you release a 0.0.1 version. If the version number is final, that is considered a released version and not a prerelease. -->
-    <version>0.3.0</version>
+    <version>0.3.1</version>
     <!-- Markdown okay -->
     <description>`serve` starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues</description>
     <authors>Philipp Gillé</authors>
@@ -45,7 +45,7 @@
 
     <!-- Dependency element for meta package -->
     <dependencies>
-      <dependency id="serve.portable" version="[0.3.0]" />
+      <dependency id="serve.portable" version="[0.3.1]" />
     </dependencies>
   </metadata>
   <!-- this section controls what actually gets packaged into the Chocolatey package -->

@@ -41,7 +41,7 @@ Example:
 ### Info
 
 Example:
-> - Version: 0.3.0
+> - Version: 0.3.1
 > - Operating system: Ubuntu 16.04
 
 ### Possible solution
