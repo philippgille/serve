@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 vNext
 -----
 
+v0.3.1 (2019-07-20)
+-------------------
+
+- Fixed: `serve` crashes at start on macOS due to a bug in UPX, which is used to compress the executable file ([issue #27](https://github.com/philippgille/serve/issues/27))
+  - See [https://github.com/upx/upx/issues/222](https://github.com/upx/upx/issues/222)
+  - Only macOS is affected, so we only release v0.3.1 build artifacts for macOS
+
 v0.3.0 (2019-05-04)
 -------------------
 
