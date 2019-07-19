@@ -33,7 +33,8 @@ GOOS=linux GOARCH=amd64 go build -v -o "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_
 # Requires UPX to be installed (for example with "apt install upx-ucl").
 if [[ "$NO_UPX" == "false" ]]; then
     upx --ultra-brute "${ARTIFACTSDIR}/serve_v${VERSION}_Windows_x64/serve.exe"
-    upx --ultra-brute "${ARTIFACTSDIR}/serve_v${VERSION}_macOS_x64/serve"
+    # Leads to a broken executable when using UPX v3.95. See https://github.com/upx/upx/issues/222.
+    #upx --ultra-brute "${ARTIFACTSDIR}/serve_v${VERSION}_macOS_x64/serve"
     upx --ultra-brute "${ARTIFACTSDIR}/serve_v${VERSION}_Linux_x64/serve"
 fi
 

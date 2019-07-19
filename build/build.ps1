@@ -56,7 +56,8 @@ $env:GOARCH = $go_arch_backup
 if (!$noUpx.IsPresent)
 {
     upx --ultra-brute "${artifactsDir}\serve_v${version}_Windows_x64\serve.exe"
-    upx --ultra-brute "${artifactsDir}\serve_v${version}_macOS_x64\serve"
+    # Leads to a broken executable when using UPX v3.95. See https://github.com/upx/upx/issues/222.
+    #upx --ultra-brute "${artifactsDir}\serve_v${version}_macOS_x64\serve"
     upx --ultra-brute "${artifactsDir}\serve_v${version}_Linux_x64\serve"
 }
 
