@@ -36,7 +36,7 @@ import (
 
 // Increment and remove "+" in release commits.
 // Add "+" after release commits.
-const version = "v0.3.0"
+const version = "v0.3.1"
 
 // Flags in alphabetical order, just like "-h" prints them
 var (
