@@ -11,9 +11,11 @@ vNext
 v0.3.1 (2019-07-20)
 -------------------
 
+> Note: This release only contains a bugfix for macOS. There's no need to update from v0.3.0 to this version on Windows or Linux.
+
 - Fixed: `serve` crashes at start on macOS due to a bug in UPX, which is used to compress the executable file ([issue #27](https://github.com/philippgille/serve/issues/27))
   - See [https://github.com/upx/upx/issues/222](https://github.com/upx/upx/issues/222)
-  - Only macOS is affected, so we only release v0.3.1 build artifacts for macOS
+  - Only macOS is affected!
 
 v0.3.0 (2019-05-04)
 -------------------
