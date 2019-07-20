@@ -1,10 +1,10 @@
 {
-    "version": "0.3.1",
-    "url": "https://github.com/philippgille/serve/releases/download/v0.3.1/serve_v0.3.1_Windows_x64.zip",
+    "version": "0.3.2",
+    "url": "https://github.com/philippgille/serve/releases/download/v0.3.2/serve_v0.3.2_Windows_x64.zip",
     "bin": "serve.exe",
     "homepage": "https://github.com/philippgille/serve",
     "description": "Starts a simple temporary static file server in your current directory and prints your IP address to share with colleagues",
-    "hash": "808ED94240EA381236DC878929603D0B41DB5668A37AD279469A11BAF0F4807F",
+    "hash": "AB8E274C2E1144440A15DD0C78BB6385084439C94F85C1413739B2C8E7C8D6BA",
     "checkver": {
         "github": "https://github.com/philippgille/serve"
     },

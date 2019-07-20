@@ -206,7 +206,7 @@ So now you can only build the Snap package on Linux, using the following steps:
 1. `snap install snapcraft --classic`
 2. `snapcraft`
 
-Depending on the current `serve` version and your CPU's architecture it will create a file like `serve_0.3.1_amd64.snap`, which can manually be installed with `snap install --dangerous serve_0.3.1_amd64.snap`.
+Depending on the current `serve` version and your CPU's architecture it will create a file like `serve_0.3.2_amd64.snap`, which can manually be installed with `snap install --dangerous serve_0.3.2_amd64.snap`.
 
 The Chocolatey packages need to be uploaded manually to Chocolatey [here](https://chocolatey.org/packages/upload). The package can be built with this script:
 

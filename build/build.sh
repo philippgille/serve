@@ -42,7 +42,7 @@ fi
 declare -a arr=("Windows" "macOS" "Linux")
 for MYOS in "${arr[@]}"
 do
-    # Sleep to prevent: tar: serve_v0.3.1_macOS_x64: file changed as we read it
+    # Sleep to prevent: tar: serve_v0.3.2_macOS_x64: file changed as we read it
     sleep 1s
     tar -czf "${ARTIFACTSDIR}/serve_v${VERSION}_${MYOS}_x64.tar.gz" -C "${ARTIFACTSDIR}" "serve_v${VERSION}_${MYOS}_x64"
 done
