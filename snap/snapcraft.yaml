@@ -24,7 +24,7 @@ confinement: strict # devmode or strict. devmode snaps can't be published to the
 #
 # Maybe "bare" might be a better fit in the future, but it's currently not supported in snapcraft/snapd.
 # "Bare" might also require serve to be compiled with CGO_ENABLED=0 and/or "netgo" + "osusergo" compile flags and/or `-extldflags "-static"` and/or more.
-base: core18
+base: core20
 
 # There currently seem to be several issues with cross compiling a snap with the go plugin.
 # Without this, and without "--target-arch=...", the snap will be built for the same arch the build is running on.
